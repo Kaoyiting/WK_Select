@@ -67,6 +67,11 @@
     @media(max-width:850px){.catalog-layout{grid-template-columns:180px minmax(0,1fr);gap:18px}.catalog-sidebar{padding:18px 12px}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px}}
     @media(max-width:620px){.catalog-layout{grid-template-columns:1fr;gap:14px;margin-top:12px}.catalog-sidebar{padding:15px 12px}.sidebar-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}}
   </style>
+  <style>
+    .menu-row{gap:22px}.home-page{padding:30px 0 64px}.home-hero{display:grid;grid-template-columns:1.05fr .95fr;min-height:470px;background:#f7f5f1;overflow:hidden}.home-hero-copy{padding:70px 7vw;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}.home-hero-copy .eyebrow{font-size:10px;letter-spacing:.2em;color:#888}.home-hero-copy h1{font-size:clamp(28px,4vw,50px);font-weight:400;line-height:1.35;letter-spacing:.06em;margin:18px 0}.home-hero-copy p{font-size:13px;color:#76716a;line-height:2;margin:0 0 23px}.home-hero-copy a{padding:13px 23px;background:#171717;color:#fff;font-size:12px;letter-spacing:.06em}.home-hero-image{min-height:470px;background:#ece9e4}.home-hero-image img{width:100%;height:100%;object-fit:cover;display:block}.home-section{padding:50px 0 0}.home-section h2{text-align:center;font-size:20px;font-weight:400;letter-spacing:.14em;margin:0 0 24px}.home-categories{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.home-category{border:0;background:#f6f4f1;padding:0;text-align:left;cursor:pointer}.home-category img{width:100%;aspect-ratio:1/1.08;object-fit:cover;display:block}.home-category span{display:block;padding:13px 14px;font-size:12px;letter-spacing:.05em}.page-hidden{display:none!important}
+    @media(max-width:850px){.menu-row{gap:14px}.home-hero{min-height:390px}.home-hero-copy{padding:45px 5vw}.home-hero-image{min-height:390px}}
+    @media(max-width:620px){.menu-row{display:none}.menu-mobile{display:flex;overflow:auto;justify-content:flex-start;gap:18px;padding:0 12px;height:40px;white-space:nowrap;font-size:11px;border-top:1px solid #f2f2f2}.menu-mobile a{color:#555}.home-page{padding:12px 0 36px}.home-hero{grid-template-columns:1fr;min-height:0}.home-hero-copy{order:2;padding:28px 22px 32px}.home-hero-copy h1{font-size:28px;margin:10px 0}.home-hero-copy p{font-size:11px;margin-bottom:17px}.home-hero-image{min-height:0;aspect-ratio:1.12/1}.home-section{padding-top:32px}.home-section h2{font-size:16px;margin-bottom:17px}.home-categories{grid-template-columns:repeat(2,1fr);gap:10px}.home-category span{padding:10px;font-size:11px}}
+  </style>
 </head>
 <body>
   <div class="promo"><div class="promo-rotator" id="promoRotator" aria-live="polite" aria-atomic="true">
@@ -85,12 +90,13 @@
         <button class="icon-btn" id="menuToggle" aria-label="開啟商品選單"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       </div>
     </div>
-    <nav class="menu-row"><a href="#catalog" data-filter-link="all">全部商品</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
-    <nav class="menu-mobile"><a href="#catalog" data-filter-link="all">全部商品</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
+    <nav class="menu-row"><a href="#home" data-page-link="home">首頁</a><a href="#catalog" data-page-link="catalog">商品頁</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog" data-category-menu>商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
+    <nav class="menu-mobile"><a href="#home" data-page-link="home">首頁</a><a href="#catalog" data-page-link="catalog">商品頁</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog" data-category-menu>商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
     <div class="searchbar" id="searchBar"><div class="wrap"><div class="searchbox"><input id="searchInput" type="search" placeholder="搜尋商品名稱"><button id="searchClear" aria-label="清除搜尋">✕</button></div></div></div>
   </header>
   <main id="top">
-    <section class="catalog wrap" id="catalog">
+    <section class="home-page wrap" id="home"><div class="home-hero"><div class="home-hero-copy"><span class="eyebrow">WK.SLELCT · KOREA SELECT SHOP</span><h1>把質感日常<br>放進你的衣櫥</h1><p>精選韓國品牌與日韓生活好物。<br>Musinsa 或任何韓國品牌商品，也可以私訊代找。</p><a href="#catalog" data-page-link="catalog">瀏覽所有商品　↗</a></div><div class="home-hero-image"><img src="assets/products/adidas-track-jacket.jpg" alt="WK.SLELCT 韓系穿搭選品" fetchpriority="high"></div></div><div class="home-section"><h2>依喜好探索</h2><div class="home-categories"><button class="home-category" data-home-category="上衣"><img src="assets/products/adidas-ringer-tee.jpg" alt="韓系上衣穿搭"><span>上衣　↗</span></button><button class="home-category" data-home-category="下身"><img src="assets/products/relaxed-sweatpants.jpg" alt="韓系下身穿搭"><span>下身　↗</span></button><button class="home-category" data-home-category="配件"><img src="assets/products/ongo-ribbon-cap.jpg" alt="韓系配件選品"><span>配件　↗</span></button><button class="home-category" data-home-category="品牌周邊"><img src="assets/products/sculptor-bag.jpg" alt="韓國品牌周邊"><span>品牌周邊　↗</span></button></div></div></section>
+        <section class="catalog wrap" id="catalog">
       <div class="catalog-title"><h1>全部商品</h1><p>把質感日常放進你的衣櫥</p></div>
       <div class="catalog-tools">
         <div></div>
@@ -100,7 +106,7 @@
       <div class="catalog-layout">
         <aside class="catalog-sidebar" aria-label="商品分類">
           <h2>商品分類</h2>
-          <div class="sidebar-categories">
+          <div class="sidebar-categories" id="sidebarCategories">
             <button data-side-filter="all">全部商品</button>
             <button data-side-filter="new">本週新品</button>
             <button data-side-filter="live">限時連線</button>
@@ -137,11 +143,11 @@
       {id:11,title:"adidas Originals 復古 Polo 上衣",brand:"adidas Originals",country:"korea",type:"預購",badge:"",img:"adidas-polo.jpg",date:20260323},
     ];
     function productImage(src){return /^https:\/\//i.test(src)?src:(src.startsWith("/")?src:"/"+src)}
-    let selectedFilter="all", cart=[], activeProduct=null;
+    let selectedFilter="all", selectedCategory="", categoryNames=[], cart=[], activeProduct=null;
     const grid=document.querySelector("#productGrid"), search=document.querySelector("#searchInput"), pageSize=document.querySelector("#pageSize"), sortSelect=document.querySelector("#sortSelect");
     const heartSvg='<svg viewBox="0 0 24 24"><path class="heart" d="M20.8 8.7c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/></svg>';
     const cartSvg='<svg viewBox="0 0 24 24"><path d="M3 4h2l2.1 11.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"/><circle cx="9.5" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>';
-    const koreanBrands=["MLB","MUCENT","Muah Muah","MATIN KIM","Mardi Mercredi","GLOWNY","OIOI","STAND OIL","emis","THISISNEVERTHAT","COVERNAT","mahagrid","SCULPTOR","Rest & Recreation","ADERERROR","Andersson Bell","MUSINSA STANDARD","Acme de la Vie","ROMANTIC CROWN","OY"];
+    let koreanBrands=["MLB","MUCENT","Muah Muah","MATIN KIM","Mardi Mercredi","GLOWNY","OIOI","STAND OIL","emis","THISISNEVERTHAT","COVERNAT","mahagrid","SCULPTOR","Rest & Recreation","ADERERROR","Andersson Bell","MUSINSA STANDARD","Acme de la Vie","ROMANTIC CROWN","OY"];
     const brandSelect=document.querySelector("#brandSelect"),brandSelectWrap=document.querySelector("#brandSelectWrap");
     [...new Set([...koreanBrands,...products.map(p=>p.brand)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const option=document.createElement("option");option.value=name;option.textContent=name;brandSelect.appendChild(option)});
     document.querySelectorAll("[data-side-filter]").forEach(button=>button.addEventListener("click",()=>{brandSelect.value="";setFilter(button.dataset.sideFilter)}));
@@ -153,6 +159,7 @@
       if(selectedFilter==="live")list=list.filter(p=>p.badge==="限時連線");
       if(selectedFilter==="stock")list=list.filter(p=>p.type==="現貨");
       if(selectedFilter==="sale")list=list.filter(p=>p.badge==="限時特價");
+      if(selectedCategory)list=list.filter(p=>p.category===selectedCategory);
       if(selectedFilter==="brand"&&brandSelect.value)list=list.filter(p=>p.brand===brandSelect.value);
       const q=search.value.trim().toLowerCase();if(q)list=list.filter(p=>(p.title+" "+p.brand).toLowerCase().includes(q));
       if(sortSelect.value==="name")list.sort((a,b)=>a.title.localeCompare(b.title,"zh-Hant"));else list.sort((a,b)=>b.date-a.date);
@@ -183,9 +190,15 @@
     }
     function openProduct(p){activeProduct=p;document.querySelector("#detailImage").src=productImage(p.img);document.querySelector("#detailImage").alt=p.title;document.querySelector("#detailTitle").textContent=p.title;document.querySelector("#detailTag").textContent=p.brand+" · "+(p.country==="korea"?"KOREA":"JAPAN");document.querySelector("#detailStatus").textContent=p.type;document.querySelector(".detail-info>p").textContent=p.description||"商品依頁面標示分為預購與現貨。也可提供 Musinsa 或韓國品牌商品連結，透過 LINE／IG 詢問代找。";document.querySelector(".detail-price").innerHTML=(p.price?'商品售價　<strong>NT$'+Number(p.price).toLocaleString("zh-TW")+'</strong>　':'商品狀態　')+'<span>'+p.type+'</span>';document.querySelector("#productDialog").showModal()}
     function showToast(message){const t=document.querySelector("#toast");t.textContent=message;t.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove("show"),1800)}
-    function setFilter(filter){selectedFilter=filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";document.querySelectorAll(".menu-row a,.menu-mobile a").forEach(a=>a.classList.toggle("active",a.dataset.filterLink===selectedFilter));document.querySelectorAll("[data-side-filter]").forEach(a=>a.classList.toggle("active",a.dataset.sideFilter===selectedFilter));if(selectedFilter!=="brand")brandSelect.value="";render()}
+    function setFilter(filter){selectedFilter=filter;selectedCategory="";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";document.querySelectorAll(".menu-row a,.menu-mobile a").forEach(a=>a.classList.toggle("active",a.dataset.filterLink===selectedFilter));document.querySelectorAll("[data-side-filter]").forEach(a=>a.classList.toggle("active",a.dataset.sideFilter===selectedFilter));document.querySelectorAll("[data-dynamic-category]").forEach(a=>a.classList.remove("active"));if(selectedFilter!=="brand")brandSelect.value="";render()}
+    function showPage(id){const page=id==="catalog"?"catalog":"home";document.querySelector("#home").classList.toggle("page-hidden",page!=="home");document.querySelector("#catalog").classList.toggle("page-hidden",page!=="catalog");document.querySelectorAll("[data-page-link]").forEach(a=>a.classList.toggle("active",a.dataset.pageLink===page));if(location.hash!=="#"+page)history.replaceState(null,"","#"+page);if(page==="catalog")window.scrollTo({top:0,behavior:"smooth"})}
+    document.querySelectorAll("[data-page-link]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPage(a.dataset.pageLink)}));
+    document.querySelectorAll(".home-category").forEach(b=>b.addEventListener("click",()=>{selectedCategory=b.dataset.homeCategory;selectedFilter="all";showPage("catalog");render()}));
+    document.querySelectorAll("[data-category-menu]").forEach(a=>a.addEventListener("click",()=>{selectedCategory="";selectedFilter="all";showPage("catalog");render()}));
     document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.filter)));
-    document.querySelectorAll("[data-filter-link]").forEach(a=>a.addEventListener("click",()=>setFilter(a.dataset.filter)));
+    document.querySelectorAll("[data-filter-link]").forEach(a=>a.addEventListener("click",()=>{showPage("catalog");setFilter(a.dataset.filter)}));
+    function renderCatalog(){const box=document.querySelector("#sidebarCategories");if(!box)return;box.querySelectorAll("[data-dynamic-category]").forEach(x=>x.remove());categoryNames.forEach(name=>{const b=document.createElement("button");b.textContent=name;b.dataset.dynamicCategory="1";b.dataset.category=name;b.className=selectedCategory===name?"active":"";b.onclick=()=>{selectedCategory=name;selectedFilter="all";brandSelect.value="";renderCatalog();render()};box.appendChild(b)})}
+    fetch("/api/catalog").then(r=>r.ok?r.json():null).then(data=>{if(!data)return;koreanBrands=data.brands||koreanBrands;categoryNames=data.categories||[];brandSelect.innerHTML='<option value="">全部品牌</option>';[...new Set([...koreanBrands,...products.map(p=>p.brand).filter(Boolean)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;brandSelect.appendChild(o)});renderCatalog()}).catch(()=>{});
     brandSelect.addEventListener("change",render);search.addEventListener("input",render);pageSize.addEventListener("change",render);sortSelect.addEventListener("change",render);
     document.querySelector("#searchToggle").addEventListener("click",()=>{const bar=document.querySelector("#searchBar");bar.classList.toggle("open");if(bar.classList.contains("open"))search.focus()});
     document.querySelector("#searchClear").addEventListener("click",()=>{search.value="";render();search.focus()});
@@ -197,7 +210,7 @@
     document.querySelector("#detailCheckout").addEventListener("click",()=>{if(activeProduct)addToCart(activeProduct);document.querySelector("#productDialog").close();document.querySelector("#cartDialog").showModal()});
     document.querySelector("#copyInquiry").addEventListener("click",async()=>{if(!cart.length){showToast("請先加入購物車");return}const text="WK.SLELCT 訂購內容\n"+cart.map((p,i)=>(i+1)+". "+p.title+" × "+p.quantity+"（"+p.type+"）").join("\n")+"\n請協助處理下單，謝謝！";try{await navigator.clipboard.writeText(text);showToast("訂購內容已複製，可貼到 IG 私訊下單")}catch{showToast("複製失敗，請直接前往 IG 下單")}});
     document.querySelector("#moreButton").addEventListener("click",()=>{pageSize.value="24";render()});
-    render();
+    render();showPage(location.hash==="#catalog"?"catalog":"home");
     fetch("/api/products").then(r=>r.ok?r.json():null).then(data=>{if(data?.products){products=data.products;brandSelect.innerHTML='<option value="">全部品牌</option>';[...new Set([...koreanBrands,...products.map(p=>p.brand)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const option=document.createElement("option");option.value=name;option.textContent=name;brandSelect.appendChild(option)});render()}}).catch(()=>{});
     const promoMessages=[...document.querySelectorAll(".promo-message")];
     if(promoMessages.length>1){let promoIndex=0;setInterval(()=>{const current=promoMessages[promoIndex];current.classList.remove("is-active");current.classList.add("is-outgoing");promoIndex=(promoIndex+1)%promoMessages.length;const next=promoMessages[promoIndex];next.classList.remove("is-outgoing");next.classList.add("is-active");setTimeout(()=>current.classList.remove("is-outgoing"),650)},3800)}
