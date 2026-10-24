@@ -21,6 +21,24 @@
     @media(max-width:950px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:38px 14px}.catalog-tools{grid-template-columns:1fr;gap:15px}.filters{order:2}.tool-selects{justify-content:center;order:1}.catalog-tools{margin-bottom:24px}}
     @media(max-width:620px){.wrap{width:calc(100% - 24px)}.promo{height:29px;font-size:10px}.head-row{height:70px;grid-template-columns:1fr auto}.brand img{width:58px;height:58px}.brand-word{font-size:12px;letter-spacing:.1em}.brand-word small{font-size:7px}.head-spacer{display:none}.head-actions{gap:9px}.icon-btn{width:31px;height:32px}.icon-btn svg{width:21px;height:21px}.menu-row{display:none}.menu-mobile{display:flex;overflow:auto;justify-content:flex-start;gap:23px;padding:0 12px;height:40px;white-space:nowrap;font-size:11px;border-top:1px solid #f2f2f2}.menu-mobile a{color:#555}.catalog{padding:22px 0 58px}.catalog-title{margin-bottom:18px}.catalog-title h1{font-size:19px}.catalog-title p{font-size:10px}.catalog-tools{gap:12px;margin-bottom:20px}.filters{gap:16px;font-size:11px}.filter{font-size:11px}.tool-selects{width:100%;gap:7px}.tool-selects select{flex:1;min-width:0!important;height:33px;padding:0 7px;font-size:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:10px;row-gap:31px}.photo{aspect-ratio:1/1}.badge{font-size:8px;padding:5px 6px}.card-actions{right:7px;bottom:7px;gap:6px}.round{width:35px;height:35px}.round svg{width:18px;height:18px}.product-link{padding-top:9px}.product-title{font-size:10px;min-height:34px}.product-sub{font-size:8px}.price{font-size:10px;margin-top:5px}.old-price{font-size:9px}.footer-grid{grid-template-columns:1fr 1fr;gap:18px}.footer-grid>div:first-child{grid-column:1/-1}.footer-brand img{width:48px;height:48px}.copyright{font-size:8px}.detail{grid-template-columns:1fr}.detail-img{min-height:0;aspect-ratio:1/1;max-height:48vh}.detail-info{padding:23px}.detail-info h2{font-size:18px;margin:7px 0}.detail-info p{margin:7px 0}.detail-price{margin:13px 0;padding:12px 0}.cart-dialog{padding:24px 18px}}
   </style>
+  <style>
+    .filters{gap:12px;flex-wrap:wrap;white-space:normal;max-width:1050px}
+    .catalog-tools{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .catalog-tools>.filters{order:2}
+    .catalog-tools>.tool-selects{order:1;justify-content:center}
+    .catalog-tools>.brand-select-row{order:3}
+    .filters .filter{font-size:11px}
+    .group-label{align-self:center;color:#aaa;font-size:10px;letter-spacing:.05em;border-left:1px solid #ddd;padding-left:12px}
+    .brand-select-row{text-align:center;font-size:10px;color:#777}
+    .brand-select-row[hidden]{display:none}
+    .brand-select-row label{margin-right:8px}
+    .brand-select-row select{height:30px;min-width:150px;border:1px solid #ddd;background:#fff;padding:0 9px;color:#555;font-size:11px}
+    .badge[hidden]{display:none}
+    .qty-control{display:inline-flex;align-items:center;gap:8px}
+    .qty-control button{width:23px;height:23px;border:0;border-radius:50%;background:#f1f1f1;cursor:pointer}
+    @media(max-width:950px){.filters{max-width:720px;row-gap:5px}.brand-select-row{order:3}}
+    @media(max-width:620px){.menu-mobile{gap:18px}.filters{gap:12px 14px;justify-content:flex-start}.filters .filter{font-size:10px}.group-label{padding-left:9px}.brand-select-row{padding-top:4px}}
+  </style>
 </head>
 <body>
   <div class="promo">🇰🇷　韓國服飾・韓系選品　｜　喜歡的商品歡迎 IG 私訊詢問　🇰🇷</div>
@@ -31,12 +49,12 @@
       <div class="head-actions">
         <button class="icon-btn" id="searchToggle" aria-label="搜尋商品"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 5 5"/></svg></button>
         <a class="icon-btn" href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener" aria-label="Instagram 私訊"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c.5-3.5 3.2-5.3 7-5.3s6.5 1.8 7 5.3"/><circle cx="12" cy="12" r="9.5"/></svg></a>
-        <button class="icon-btn" id="cartOpen" aria-label="開啟詢價清單"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.1 11.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"/><circle cx="9.5" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="count" id="cartCount">0</span></button>
+        <button class="icon-btn" id="cartOpen" aria-label="開啟購物車"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.1 11.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"/><circle cx="9.5" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="count" id="cartCount">0</span></button>
         <button class="icon-btn" id="menuToggle" aria-label="開啟商品選單"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       </div>
     </div>
-    <nav class="menu-row"><a href="#top" class="active">全部商品</a><a href="#catalog" data-filter-link="korea">韓國選品</a><a href="#catalog" data-filter-link="japan">日本代購</a><a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">IG 私訊詢問</a></nav>
-    <nav class="menu-mobile"><a href="#top">全部商品</a><a href="#catalog" data-filter-link="korea">韓國選品</a><a href="#catalog" data-filter-link="japan">日本代購</a><a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">IG 詢問</a></nav>
+    <nav class="menu-row"><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
+    <nav class="menu-mobile"><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
     <div class="searchbar" id="searchBar"><div class="wrap"><div class="searchbox"><input id="searchInput" type="search" placeholder="搜尋商品名稱"><button id="searchClear" aria-label="清除搜尋">✕</button></div></div></div>
   </header>
   <main id="top">
@@ -45,8 +63,9 @@
       <div class="catalog-tools">
         <div></div>
         <div class="filters" role="group" aria-label="商品分類">
-          <button class="filter active" data-filter="all">全部商品</button><button class="filter" data-filter="korea">🇰🇷 韓國選品</button><button class="filter" data-filter="japan">🇯🇵 日本代購</button>
+          <button class="filter" data-filter="new">本週新品</button><button class="filter" id="brandButton" data-filter="brand" aria-expanded="false">品牌⌄</button><button class="filter" data-filter="live">限時連線</button><button class="filter" data-filter="stock">現貨賣場</button><span class="group-label">商品分類</span><button class="filter" data-filter="korea">🇰🇷 韓國選品</button><button class="filter" data-filter="japan">🇯🇵 日本代購</button><button class="filter" data-filter="sale">限時特價</button>
         </div>
+        <div class="brand-select-row" id="brandSelectWrap" hidden><label for="brandSelect">選擇品牌</label><select id="brandSelect"><option value="">全部品牌</option></select></div>
         <div class="tool-selects"><select id="sortSelect" aria-label="商品排序"><option value="new">商品排序　最新上架</option><option value="name">商品名稱　A–Z</option></select><select id="pageSize" aria-label="每頁顯示商品數量"><option value="12">每頁顯示 12 個</option><option value="24">每頁顯示 24 個</option></select></div>
       </div>
       <div class="grid" id="productGrid"></div>
@@ -56,50 +75,86 @@
   <footer class="footer">
     <div class="wrap footer-grid">
       <div><a class="footer-brand" href="#top"><img src="assets/products/wk-logo.jpg" alt=""><span><b>WK.SLELCT</b><small>KOREA SELECT SHOP</small></span></a><div style="margin-top:9px">韓系穿搭｜韓國服飾｜韓國代購</div></div>
-      <div><div class="footer-title">購物小提醒</div><div>商品價格、顏色與尺寸依實際詢價確認。</div><div>預購商品到貨時間依品牌與物流狀況為準。</div><div>日本商品可直接私訊詢問代購。</div></div>
+      <div><div class="footer-title">購物小提醒</div><div>商品依頁面標示分為預購與現貨。</div><div>預購商品到貨時間依品牌與物流狀況為準。</div><div>日本商品可直接詢問代購。</div></div>
       <div><div class="footer-title">關注我們</div><div><a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">@wk.select.kr　↗</a></div><div><a href="https://linktr.ee/wk.select.kr" target="_blank" rel="noopener">更多聯絡方式　↗</a></div><div>商品問題歡迎 Instagram 私訊</div></div>
     </div>
     <div class="wrap copyright">© 2026 WK.SLELCT. All rights reserved.</div>
   </footer>
-  <dialog id="productDialog"><div class="detail"><button class="close" data-close aria-label="關閉">×</button><div class="detail-img"><img id="detailImage" src="" alt=""></div><div class="detail-info"><div class="eyebrow" id="detailTag">KOREA SELECT</div><h2 id="detailTitle"></h2><p>商品款式、尺寸與現貨狀況請透過 Instagram 私訊確認。送出詢價前，我們會先回覆商品金額與預計到貨資訊。</p><div class="detail-price">價格　<strong>私訊詢價</strong></div><div class="detail-actions"><button class="solid-btn" id="detailAdd">加入詢價清單</button><a class="line-btn" href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">前往 Instagram 私訊</a></div></div></div></dialog>
-  <dialog class="cart-dialog" id="cartDialog"><button class="close" data-close aria-label="關閉">×</button><h2>詢價清單</h2><p>整理想詢問的商品，再透過 Instagram 私訊 WK.SLELCT。清單不會自動送出訂單。</p><div class="cart-list" id="cartList"></div><button class="solid-btn" id="copyInquiry" style="width:100%">複製詢價清單</button><a class="line-btn" href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener" style="margin-top:9px">前往 Instagram 私訊</a></dialog>
+  <dialog id="productDialog"><div class="detail"><button class="close" data-close aria-label="關閉">×</button><div class="detail-img"><img id="detailImage" src="" alt=""></div><div class="detail-info"><div class="eyebrow" id="detailTag">KOREA SELECT</div><h2 id="detailTitle"></h2><p>商品依頁面標示分為預購與現貨。確認款式與數量後即可加入購物車。</p><div class="detail-price">商品狀態　<strong id="detailStatus">預購</strong></div><div class="detail-actions"><button class="solid-btn" id="detailAdd">加入購物車</button><button class="line-btn" id="detailCheckout">直接下單</button></div></div></div></dialog>
+  <dialog class="cart-dialog" id="cartDialog"><button class="close" data-close aria-label="關閉">×</button><h2>購物車</h2><p>商品依「預購／現貨」分類。整理好商品與數量後，可複製訂購內容並透過 Instagram 下單。</p><div class="cart-list" id="cartList"></div><button class="solid-btn" id="copyInquiry" style="width:100%">複製訂購內容</button><a class="line-btn" href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener" style="margin-top:9px">前往 Instagram 下單</a></dialog>
   <div class="toast" id="toast" role="status"></div>
   <script>
     const products=[
-      {id:1,title:"MLB 蝴蝶結貓耳毛帽",category:"韓國選品",img:"mlb-cat-beanie.jpg",tag:"韓國新品",date:20261015},
-      {id:2,title:"Muah Muah 入秋針織外套",category:"韓國選品",img:"muah-muah-knit.jpg",tag:"韓國新品",date:20261013},
-      {id:3,title:"adidas 華夫格運動外套",category:"韓國選品",img:"adidas-track-jacket.jpg",tag:"韓國新品",date:20261012},
-      {id:4,title:"Pokémon 聯名生活選品",category:"韓國選品",img:"pokemon-collab.jpg",tag:"韓國選品",date:20260719},
-      {id:5,title:"韓系黑色短袖丹寧襯衫",category:"韓國選品",img:"denim-overshirt.jpg",tag:"韓國穿搭",date:20260702},
-      {id:6,title:"adidas 復古滾邊短袖上衣",category:"韓國選品",img:"adidas-ringer-tee.jpg",tag:"韓國穿搭",date:20260701},
-      {id:7,title:"ONG0 蝴蝶結丹寧棒球帽",category:"韓國選品",img:"ongo-ribbon-cap.jpg",tag:"韓國選品",date:20260408},
-      {id:8,title:"SCULPTOR Local Angel 側背包",category:"韓國選品",img:"sculptor-bag.jpg",tag:"韓國選品",date:20260404},
-      {id:9,title:"韓系寬版休閒棉褲",category:"韓國選品",img:"relaxed-sweatpants.jpg",tag:"韓國穿搭",date:20260326},
-      {id:10,title:"marie claire 復古滾邊短袖",category:"韓國選品",img:"marie-claire-tee.jpg",tag:"韓國選品",date:20260326},
-      {id:11,title:"adidas Originals 復古 Polo 上衣",category:"韓國選品",img:"adidas-polo.jpg",tag:"韓國選品",date:20260323},
-      {id:12,title:"韓系厚底休閒鞋",category:"韓國選品",img:"korean-sneakers.jpg",tag:"韓國選品",date:20260320}
+      {id:1,title:"MLB 蝴蝶結貓耳毛帽",brand:"MLB",country:"korea",type:"預購",badge:"",img:"mlb-cat-beanie.jpg",date:20261015},
+      {id:2,title:"Muah Muah 入秋針織外套",brand:"Muah Muah",country:"korea",type:"預購",badge:"",img:"muah-muah-knit.jpg",date:20261013},
+      {id:3,title:"adidas 華夫格運動外套",brand:"adidas",country:"korea",type:"預購",badge:"",img:"adidas-track-jacket.jpg",date:20261012},
+      {id:4,title:"Pokémon 聯名生活選品",brand:"Pokémon",country:"korea",type:"預購",badge:"",img:"pokemon-collab.jpg",date:20260719},
+      {id:5,title:"韓系黑色短袖丹寧襯衫",brand:"韓系選品",country:"korea",type:"預購",badge:"",img:"denim-overshirt.jpg",date:20260702},
+      {id:6,title:"adidas 復古滾邊短袖上衣",brand:"adidas",country:"korea",type:"預購",badge:"",img:"adidas-ringer-tee.jpg",date:20260701},
+      {id:7,title:"ONG0 蝴蝶結丹寧棒球帽",brand:"ONG0",country:"korea",type:"預購",badge:"",img:"ongo-ribbon-cap.jpg",date:20260408},
+      {id:8,title:"SCULPTOR Local Angel 側背包",brand:"SCULPTOR",country:"korea",type:"預購",badge:"",img:"sculptor-bag.jpg",date:20260404},
+      {id:9,title:"韓系寬版休閒棉褲",brand:"韓系選品",country:"korea",type:"預購",badge:"",img:"relaxed-sweatpants.jpg",date:20260326},
+      {id:10,title:"marie claire 復古滾邊短袖",brand:"marie claire",country:"korea",type:"預購",badge:"",img:"marie-claire-tee.jpg",date:20260326},
+      {id:11,title:"adidas Originals 復古 Polo 上衣",brand:"adidas Originals",country:"korea",type:"預購",badge:"",img:"adidas-polo.jpg",date:20260323},
+      {id:12,title:"韓系厚底休閒鞋",brand:"韓系選品",country:"korea",type:"預購",badge:"",img:"korean-sneakers.jpg",date:20260320}
     ];
     let selectedFilter="all", cart=[], activeProduct=null;
     const grid=document.querySelector("#productGrid"), search=document.querySelector("#searchInput"), pageSize=document.querySelector("#pageSize"), sortSelect=document.querySelector("#sortSelect");
     const heartSvg='<svg viewBox="0 0 24 24"><path class="heart" d="M20.8 8.7c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/></svg>';
     const cartSvg='<svg viewBox="0 0 24 24"><path d="M3 4h2l2.1 11.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"/><circle cx="9.5" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>';
-    function filteredProducts(){let list=[...products];if(selectedFilter==="korea")list=list.filter(p=>p.category==="韓國選品");if(selectedFilter==="japan")list=[];const q=search.value.trim().toLowerCase();if(q)list=list.filter(p=>p.title.toLowerCase().includes(q));if(sortSelect.value==="name")list.sort((a,b)=>a.title.localeCompare(b.title,"zh-Hant"));else list.sort((a,b)=>b.date-a.date);return list.slice(0,Number(pageSize.value))}
-    function render(){const list=filteredProducts();grid.innerHTML="";if(selectedFilter==="japan"&&!search.value.trim()){grid.innerHTML='<div class="empty">日本商品可以直接私訊代購需求，我們會協助確認商品與報價。<br><a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">前往 Instagram 詢問日本商品 ↗</a></div>';document.querySelector("#more").hidden=true;return}document.querySelector("#more").hidden=list.length===0||list.length<Number(pageSize.value);if(!list.length){grid.innerHTML='<div class="empty">找不到符合的商品，試試其他關鍵字。</div>';return}for(const p of list){const card=document.createElement("article");card.className="card";card.innerHTML='<div class="photo"><img src="assets/products/'+p.img+'" alt="'+p.title+'" loading="lazy"><span class="badge">'+p.tag+'</span><div class="card-actions"><button class="round favorite" aria-label="收藏 '+p.title+'" aria-pressed="false">'+heartSvg+'</button><button class="round add" aria-label="加入 '+p.title+' 詢價清單">'+cartSvg+'</button></div></div><button class="product-link"><div class="product-title">'+p.title+'</div><div class="product-sub">韓國代購 / 預購・庫存私訊確認</div><div class="price"><strong>私訊詢價</strong></div></button>';card.querySelector(".favorite").addEventListener("click",e=>{e.stopPropagation();const b=e.currentTarget;b.classList.toggle("active");b.setAttribute("aria-pressed",b.classList.contains("active"))});card.querySelector(".add").addEventListener("click",e=>{e.stopPropagation();addToCart(p)});card.querySelector(".product-link").addEventListener("click",()=>openProduct(p));grid.appendChild(card)}}
-    function addToCart(p){if(!cart.some(x=>x.id===p.id))cart.push(p);document.querySelector("#cartCount").textContent=cart.length;renderCart();showToast("已加入詢價清單")}
-    function renderCart(){const box=document.querySelector("#cartList");if(!cart.length){box.innerHTML='<div class="cart-empty">詢價清單還沒有商品</div>';return}box.innerHTML=cart.map(p=>'<div class="cart-row"><img src="assets/products/'+p.img+'" alt=""><span>'+p.title+'<br><small style="color:#888">私訊詢價</small></span><button class="remove" data-remove="'+p.id+'">移除</button></div>').join("");box.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{cart=cart.filter(p=>p.id!==Number(b.dataset.remove));document.querySelector("#cartCount").textContent=cart.length;renderCart()}))}
-    function openProduct(p){activeProduct=p;document.querySelector("#detailImage").src="assets/products/"+p.img;document.querySelector("#detailImage").alt=p.title;document.querySelector("#detailTitle").textContent=p.title;document.querySelector("#detailTag").textContent=p.tag;document.querySelector("#productDialog").showModal()}
+    const brandSelect=document.querySelector("#brandSelect"),brandSelectWrap=document.querySelector("#brandSelectWrap");
+    [...new Set(products.map(p=>p.brand))].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const option=document.createElement("option");option.value=name;option.textContent=name;brandSelect.appendChild(option)});
+    function filteredProducts(){
+      let list=[...products];
+      if(selectedFilter==="korea")list=list.filter(p=>p.country==="korea");
+      if(selectedFilter==="japan")list=list.filter(p=>p.country==="japan");
+      if(selectedFilter==="new")list=list.filter(p=>p.badge==="本週新品");
+      if(selectedFilter==="live")list=list.filter(p=>p.badge==="限時連線");
+      if(selectedFilter==="stock")list=list.filter(p=>p.type==="現貨");
+      if(selectedFilter==="sale")list=list.filter(p=>p.badge==="限時特價");
+      if(selectedFilter==="brand"&&brandSelect.value)list=list.filter(p=>p.brand===brandSelect.value);
+      const q=search.value.trim().toLowerCase();if(q)list=list.filter(p=>(p.title+" "+p.brand).toLowerCase().includes(q));
+      if(sortSelect.value==="name")list.sort((a,b)=>a.title.localeCompare(b.title,"zh-Hant"));else list.sort((a,b)=>b.date-a.date);
+      return list
+    }
+    function render(){
+      const list=filteredProducts();grid.innerHTML="";
+      if(selectedFilter==="japan"&&!search.value.trim()){grid.innerHTML='<div class="empty">日本商品可直接透過 Instagram 提出代購需求。<br><a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">詢問日本商品 ↗</a></div>';document.querySelector("#more").hidden=true;return}
+      document.querySelector("#more").hidden=list.length<=Number(pageSize.value);
+      if(!list.length){grid.innerHTML='<div class="empty">目前此分類沒有上架商品，歡迎瀏覽其他選品。</div>';return}
+      for(const p of list.slice(0,Number(pageSize.value))){
+        const card=document.createElement("article");card.className="card";
+        const badge=p.badge?'<span class="badge">'+p.badge+'</span>':'';
+        card.innerHTML='<div class="photo"><img src="assets/products/'+p.img+'" alt="'+p.title+'" loading="lazy">'+badge+'<div class="card-actions"><button class="round favorite" aria-label="收藏 '+p.title+'" aria-pressed="false">'+heartSvg+'</button><button class="round add" aria-label="加入 '+p.title+' 購物車">'+cartSvg+'</button></div></div><button class="product-link"><div class="product-title">'+p.title+'</div><div class="product-sub">'+(p.country==="korea"?"🇰🇷 韓國選品":"🇯🇵 日本代購")+'　/　'+p.type+'</div><div class="price"><strong>私訊詢價</strong></div></button>';
+        card.querySelector(".favorite").addEventListener("click",e=>{e.stopPropagation();const b=e.currentTarget;b.classList.toggle("active");b.setAttribute("aria-pressed",b.classList.contains("active"))});
+        card.querySelector(".add").addEventListener("click",e=>{e.stopPropagation();addToCart(p)});
+        card.querySelector(".product-link").addEventListener("click",()=>openProduct(p));grid.appendChild(card)
+      }
+    }
+    function addToCart(p){const existing=cart.find(x=>x.id===p.id);if(existing)existing.quantity++;else cart.push({...p,quantity:1});updateCartCount();renderCart();showToast("已加入購物車")}
+    function updateCartCount(){document.querySelector("#cartCount").textContent=cart.reduce((sum,p)=>sum+p.quantity,0)}
+    function renderCart(){
+      const box=document.querySelector("#cartList");
+      if(!cart.length){box.innerHTML='<div class="cart-empty">購物車還沒有商品</div>';return}
+      box.innerHTML=cart.map(p=>'<div class="cart-row"><img src="assets/products/'+p.img+'" alt=""><span>'+p.title+'<br><small style="color:#888">'+p.type+'</small></span><div class="qty-control"><button data-qty="-1" data-id="'+p.id+'" aria-label="減少數量">−</button><span>'+p.quantity+'</span><button data-qty="1" data-id="'+p.id+'" aria-label="增加數量">＋</button></div></div>').join("");
+      box.querySelectorAll("[data-qty]").forEach(b=>b.addEventListener("click",()=>{const p=cart.find(x=>x.id===Number(b.dataset.id));if(!p)return;p.quantity+=Number(b.dataset.qty);if(p.quantity<=0)cart=cart.filter(x=>x.id!==p.id);updateCartCount();renderCart()}))
+    }
+    function openProduct(p){activeProduct=p;document.querySelector("#detailImage").src="assets/products/"+p.img;document.querySelector("#detailImage").alt=p.title;document.querySelector("#detailTitle").textContent=p.title;document.querySelector("#detailTag").textContent=p.brand+" · "+(p.country==="korea"?"KOREA":"JAPAN");document.querySelector("#detailStatus").textContent=p.type;document.querySelector("#productDialog").showModal()}
     function showToast(message){const t=document.querySelector("#toast");t.textContent=message;t.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove("show"),1800)}
-    document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");selectedFilter=b.dataset.filter;render()}));
-    document.querySelectorAll("[data-filter-link]").forEach(a=>a.addEventListener("click",()=>{selectedFilter=a.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));render()}));
-    search.addEventListener("input",render);pageSize.addEventListener("change",render);sortSelect.addEventListener("change",render);
+    function setFilter(filter){selectedFilter=filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";document.querySelector("#brandButton").setAttribute("aria-expanded",selectedFilter==="brand");if(selectedFilter!=="brand")brandSelect.value="";render()}
+    document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.filter)));
+    document.querySelectorAll("[data-filter-link]").forEach(a=>a.addEventListener("click",()=>setFilter(a.dataset.filter)));
+    brandSelect.addEventListener("change",render);search.addEventListener("input",render);pageSize.addEventListener("change",render);sortSelect.addEventListener("change",render);
     document.querySelector("#searchToggle").addEventListener("click",()=>{const bar=document.querySelector("#searchBar");bar.classList.toggle("open");if(bar.classList.contains("open"))search.focus()});
     document.querySelector("#searchClear").addEventListener("click",()=>{search.value="";render();search.focus()});
-    document.querySelector("#menuToggle").addEventListener("click",()=>{document.querySelector(".menu-mobile").scrollIntoView({behavior:"smooth",block:"center"});showToast("選擇商品分類或開啟 Instagram 詢問")});
+    document.querySelector("#menuToggle").addEventListener("click",()=>{document.querySelector(".menu-mobile").scrollIntoView({behavior:"smooth",block:"center"});showToast("選擇商品分類")});
     document.querySelector("#cartOpen").addEventListener("click",()=>document.querySelector("#cartDialog").showModal());
     document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>b.closest("dialog").close()));
     document.querySelectorAll("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d)d.close()}));
     document.querySelector("#detailAdd").addEventListener("click",()=>{if(activeProduct)addToCart(activeProduct);document.querySelector("#productDialog").close()});
-    document.querySelector("#copyInquiry").addEventListener("click",async()=>{if(!cart.length){showToast("請先加入想詢問的商品");return}const text="WK.SLELCT 商品詢價\\n"+cart.map((p,i)=>(i+1)+". "+p.title).join("\\n")+"\\n想詢問商品價格、尺寸與庫存，謝謝！";try{await navigator.clipboard.writeText(text);showToast("詢價清單已複製，貼到 IG 私訊即可")}catch{showToast("複製失敗，請直接私訊 IG 詢問")}});document.querySelector("#moreButton").addEventListener("click",()=>{pageSize.value="24";render()});
+    document.querySelector("#detailCheckout").addEventListener("click",()=>{if(activeProduct)addToCart(activeProduct);document.querySelector("#productDialog").close();document.querySelector("#cartDialog").showModal()});
+    document.querySelector("#copyInquiry").addEventListener("click",async()=>{if(!cart.length){showToast("請先加入購物車");return}const text="WK.SLELCT 訂購內容\n"+cart.map((p,i)=>(i+1)+". "+p.title+" × "+p.quantity+"（"+p.type+"）").join("\n")+"\n請協助處理下單，謝謝！";try{await navigator.clipboard.writeText(text);showToast("訂購內容已複製，可貼到 IG 私訊下單")}catch{showToast("複製失敗，請直接前往 IG 下單")}});
+    document.querySelector("#moreButton").addEventListener("click",()=>{pageSize.value="24";render()});
     render();
   </script>
 </body>
