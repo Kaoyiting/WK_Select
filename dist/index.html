@@ -40,14 +40,18 @@
     @media(max-width:620px){.menu-mobile{gap:18px}.filters{gap:12px 14px;justify-content:flex-start}.filters .filter{font-size:10px}.group-label{padding-left:9px}.brand-select-row{padding-top:4px}}
   </style>
   <style>
+    .promo-content{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;white-space:nowrap}
+    .promo-content a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+    .promo-divider{opacity:.6}
+    @media(max-width:620px){.promo{overflow:hidden}.promo-content{justify-content:flex-start;overflow-x:auto;padding:0 12px;gap:9px;font-size:9px}.promo-content::-webkit-scrollbar{display:none}.catalog-sidebar{padding:12px 0}.sidebar-categories button.active{padding-left:8px}}
     .catalog-tools{max-width:none;margin-bottom:22px}
     .catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px;align-items:start;margin-top:24px}
-    .catalog-sidebar{padding:22px 18px;border:1px solid #e8e8e8;background:#fff}
+    .catalog-sidebar{padding:22px 18px;border:0;background:transparent}
     .catalog-sidebar h2{margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid #e8e8e8;color:#222;font-size:14px;font-weight:600;letter-spacing:.08em}
     .sidebar-categories{display:grid;gap:3px}
     .sidebar-categories button{width:100%;border:0;background:transparent;text-align:left;padding:9px 10px;color:#666;font-size:12px;cursor:pointer;border-radius:3px}
-    .sidebar-categories button:hover,.sidebar-categories button.active{background:#f7f4f1;color:#a40000}
-    .sidebar-categories button.active{font-weight:600}
+    .sidebar-categories button:hover{color:#a40000}.sidebar-categories button.active{background:transparent;color:#a40000;border-left:2px solid #a40000}
+    .sidebar-categories button.active{font-weight:600;padding-left:8px}
     .catalog-results{min-width:0}
     .catalog-layout .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:38px 16px}
     .tool-selects select{background:#f5f5f5;color:#555;border:0}
@@ -61,7 +65,7 @@
   </style>
 </head>
 <body>
-  <div class="promo">🇰🇷　Musinsa 或任何韓國品牌商品都可代找　｜　歡迎透過 <a href="https://linktr.ee/wk.select.kr" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">LINE</a>／<a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">IG</a> 詢問　🇰🇷</div>
+  <div class="promo"><div class="promo-content"><span>全館滿 NT$1,800 免運</span><span class="promo-divider">｜</span><span>Olive Young Black Friday 11/1–11/7</span><span class="promo-divider">｜</span><span>歡迎透過 <a href="https://linktr.ee/wk.select.kr" target="_blank" rel="noopener">LINE</a>／<a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">IG</a> 詢問商品</span></div></div>
   <header class="header">
     <div class="wrap head-row">
       <a class="brand" href="#top" aria-label="WK.SLELCT 首頁"><img src="assets/products/wk-logo.jpg" alt="WK 品牌標誌"><span class="brand-word">WK.SLELCT<small>KOREA SELECT SHOP</small></span></a>
