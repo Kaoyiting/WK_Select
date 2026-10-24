@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#315d82">
+  <meta name="theme-color" content="#ffffff">
   <meta name="description" content="WK.SLELCT 韓國代購選品｜Musinsa 與各式韓國品牌商品代找。">
   <title>WK.SLELCT｜韓國代購選品</title>
   <style>
-    :root{--red:#315d82;--ink:#182634;--gray:#6f8292;--line:#dce7f0;--soft:#f2f7fb;--white:#fff;--page:1180px}
+    :root{--red:#a40000;--ink:#171717;--gray:#777;--line:#e8e8e8;--soft:#f5f5f5;--white:#fff;--page:1180px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--white);color:var(--ink);font-family:Arial,"Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,select,input{font:inherit}button{color:inherit}
     .wrap{width:min(var(--page),calc(100% - 42px));margin:auto}
     .promo{height:31px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;letter-spacing:.06em}
@@ -42,26 +42,22 @@
   <style>
     .catalog-tools{max-width:none;margin-bottom:22px}
     .catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px;align-items:start;margin-top:24px}
-    .catalog-sidebar{padding:22px 18px;border:1px solid #dce7f0;background:#f7fafd}
-    .catalog-sidebar h2{margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid #dce7f0;color:#254d70;font-size:14px;font-weight:600;letter-spacing:.08em}
+    .catalog-sidebar{padding:22px 18px;border:1px solid #e8e8e8;background:#fff}
+    .catalog-sidebar h2{margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid #e8e8e8;color:#222;font-size:14px;font-weight:600;letter-spacing:.08em}
     .sidebar-categories{display:grid;gap:3px}
-    .sidebar-categories button,.side-brand{width:100%;border:0;background:transparent;text-align:left;padding:9px 10px;color:#526a7f;font-size:12px;cursor:pointer;border-radius:3px}
-    .sidebar-categories button:hover,.sidebar-categories button.active,.side-brand:hover,.side-brand.active{background:#e6f0f8;color:#244e72}
+    .sidebar-categories button{width:100%;border:0;background:transparent;text-align:left;padding:9px 10px;color:#666;font-size:12px;cursor:pointer;border-radius:3px}
+    .sidebar-categories button:hover,.sidebar-categories button.active{background:#f7f4f1;color:#a40000}
     .sidebar-categories button.active{font-weight:600}
-    .sidebar-brand-group{margin-top:22px}
-    .sidebar-brand-group h3{margin:0 0 9px;color:#254d70;font-size:12px;font-weight:600;letter-spacing:.06em}
-    .sidebar-brands{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-    .side-brand{font-size:10px;padding:7px 6px}
     .catalog-results{min-width:0}
     .catalog-layout .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:38px 16px}
-    .tool-selects select{background:#f2f7fb;color:#3e5d78;border:1px solid #e6eef5}
-    .stock-store{border-color:#dce7f0;background:#f7fafd}
-    .stock-store a,.solid-btn{background:#315d82;border-color:#315d82}
-    .stock-store a:hover,.solid-btn:hover{background:#244e72;border-color:#244e72}
-    .line-btn{border-color:#315d82;color:#315d82}
-    .menu-row a.active,.menu-mobile a.active{color:#315d82}
+    .tool-selects select{background:#f5f5f5;color:#555;border:0}
+    .stock-store{border-color:#e8e8e8;background:#fafafa}
+    .stock-store a,.solid-btn{background:#171717;border-color:#171717}
+    .stock-store a:hover,.solid-btn:hover{background:#a40000;border-color:#a40000}
+    .line-btn{border-color:#171717;color:#171717}
+    .menu-row a.active,.menu-mobile a.active{color:#a40000}
     @media(max-width:850px){.catalog-layout{grid-template-columns:180px minmax(0,1fr);gap:18px}.catalog-sidebar{padding:18px 12px}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px}}
-    @media(max-width:620px){.catalog-layout{grid-template-columns:1fr;gap:14px;margin-top:12px}.catalog-sidebar{padding:15px 12px}.sidebar-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar-brand-group{margin-top:13px}.sidebar-brands{grid-template-columns:repeat(3,minmax(0,1fr))}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}}
+    @media(max-width:620px){.catalog-layout{grid-template-columns:1fr;gap:14px;margin-top:12px}.catalog-sidebar{padding:15px 12px}.sidebar-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}}
   </style>
 </head>
 <body>
@@ -77,8 +73,8 @@
         <button class="icon-btn" id="menuToggle" aria-label="開啟商品選單"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       </div>
     </div>
-    <nav class="menu-row"><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
-    <nav class="menu-mobile"><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
+    <nav class="menu-row"><a href="#catalog" data-filter-link="all">全部商品</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
+    <nav class="menu-mobile"><a href="#catalog" data-filter-link="all">全部商品</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog">商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
     <div class="searchbar" id="searchBar"><div class="wrap"><div class="searchbox"><input id="searchInput" type="search" placeholder="搜尋商品名稱"><button id="searchClear" aria-label="清除搜尋">✕</button></div></div></div>
   </header>
   <main id="top">
@@ -86,11 +82,11 @@
       <div class="catalog-title"><h1>全部商品</h1><p>把質感日常放進你的衣櫥</p></div>
       <div class="catalog-tools">
         <div></div>
-        <div class="brand-select-row" id="brandSelectWrap" hidden><label for="brandSelect">選擇品牌</label><select id="brandSelect"><option value="">全部品牌</option></select></div>
+        <div class="brand-select-row" id="brandSelectWrap" hidden><label for="brandSelect">選擇韓國品牌</label><select id="brandSelect"><option value="">全部品牌</option></select></div>
         <div class="tool-selects"><select id="sortSelect" aria-label="商品排序"><option value="new">商品排序　最新上架</option><option value="name">商品名稱　A–Z</option></select><select id="pageSize" aria-label="每頁顯示商品數量"><option value="12">每頁顯示 12 個</option><option value="24">每頁顯示 24 個</option></select></div>
       </div>
       <div class="catalog-layout">
-        <aside class="catalog-sidebar" aria-label="商品分類與韓國品牌">
+        <aside class="catalog-sidebar" aria-label="商品分類">
           <h2>商品分類</h2>
           <div class="sidebar-categories">
             <button data-side-filter="all">全部商品</button>
@@ -101,11 +97,7 @@
             <button data-side-filter="japan">🇯🇵 日本代購</button>
             <button data-side-filter="sale">限時特價</button>
           </div>
-          <div class="sidebar-brand-group">
-            <h3>KR 韓國品牌</h3>
-            <div class="sidebar-brands" id="sidebarBrands"></div>
-          </div>
-        </aside>
+</aside>
         <div class="catalog-results">
           <div class="grid" id="productGrid"></div>
           <div class="more" id="more"><button id="moreButton">顯示更多商品</button></div>
@@ -139,10 +131,7 @@
     const koreanBrands=["MLB","MUCENT","Muah Muah","MATIN KIM","Mardi Mercredi","GLOWNY","OIOI","STAND OIL","emis","THISISNEVERTHAT","COVERNAT","mahagrid","SCULPTOR","Rest & Recreation","ADERERROR","Andersson Bell","MUSINSA STANDARD","Acme de la Vie","ROMANTIC CROWN","OY"];
     const brandSelect=document.querySelector("#brandSelect"),brandSelectWrap=document.querySelector("#brandSelectWrap");
     [...new Set([...koreanBrands,...products.map(p=>p.brand)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const option=document.createElement("option");option.value=name;option.textContent=name;brandSelect.appendChild(option)});
-    const sidebarBrands=document.querySelector("#sidebarBrands");
-    koreanBrands.forEach(name=>{const button=document.createElement("button");button.type="button";button.className="side-brand";button.dataset.sideBrand=name;button.textContent=name;sidebarBrands.appendChild(button)});
     document.querySelectorAll("[data-side-filter]").forEach(button=>button.addEventListener("click",()=>{brandSelect.value="";setFilter(button.dataset.sideFilter)}));
-    sidebarBrands.addEventListener("click",event=>{const button=event.target.closest("[data-side-brand]");if(!button)return;brandSelect.value=button.dataset.sideBrand;setFilter("brand");brandSelect.value=button.dataset.sideBrand;render();document.querySelectorAll(".side-brand").forEach(x=>x.classList.toggle("active",x===button))});
     function filteredProducts(){
       let list=[...products];
       if(selectedFilter==="korea")list=list.filter(p=>p.country==="korea");
@@ -181,7 +170,7 @@
     }
     function openProduct(p){activeProduct=p;document.querySelector("#detailImage").src="assets/products/"+p.img;document.querySelector("#detailImage").alt=p.title;document.querySelector("#detailTitle").textContent=p.title;document.querySelector("#detailTag").textContent=p.brand+" · "+(p.country==="korea"?"KOREA":"JAPAN");document.querySelector("#detailStatus").textContent=p.type;document.querySelector("#productDialog").showModal()}
     function showToast(message){const t=document.querySelector("#toast");t.textContent=message;t.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove("show"),1800)}
-    function setFilter(filter){selectedFilter=filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";document.querySelectorAll(".menu-row a,.menu-mobile a").forEach(a=>a.classList.toggle("active",a.dataset.filterLink===selectedFilter));document.querySelectorAll("[data-side-filter]").forEach(a=>a.classList.toggle("active",a.dataset.sideFilter===selectedFilter));if(selectedFilter!=="brand")brandSelect.value="";document.querySelectorAll(".side-brand").forEach(x=>x.classList.toggle("active",selectedFilter==="brand"&&x.dataset.sideBrand===brandSelect.value));render()}
+    function setFilter(filter){selectedFilter=filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";document.querySelectorAll(".menu-row a,.menu-mobile a").forEach(a=>a.classList.toggle("active",a.dataset.filterLink===selectedFilter));document.querySelectorAll("[data-side-filter]").forEach(a=>a.classList.toggle("active",a.dataset.sideFilter===selectedFilter));if(selectedFilter!=="brand")brandSelect.value="";render()}
     document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.filter)));
     document.querySelectorAll("[data-filter-link]").forEach(a=>a.addEventListener("click",()=>setFilter(a.dataset.filter)));
     brandSelect.addEventListener("change",render);search.addEventListener("input",render);pageSize.addEventListener("change",render);sortSelect.addEventListener("change",render);
