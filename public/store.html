@@ -64,6 +64,35 @@
     .stock-store a:hover,.solid-btn:hover{background:#a40000;border-color:#a40000}
     .line-btn{border-color:#171717;color:#171717}
     .menu-row a.active,.menu-mobile a.active{color:#a40000}
+    .menu-row,.menu-mobile{background:#d2cec6;color:#333;border-color:#d2cec6;gap:0;justify-content:center}
+    .menu-group{position:relative;display:inline-flex;align-items:center;height:100%;}
+    .menu-trigger{height:100%;padding:0 15px;border:0;background:transparent;color:#393732;font:inherit;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap}
+    .menu-trigger:hover,.menu-trigger[aria-expanded="true"]{background:#c6c1b8;color:#171717}
+    .menu-chevron{font-size:10px;transition:transform .18s ease}
+    .menu-trigger[aria-expanded="true"] .menu-chevron{transform:rotate(180deg)}
+    .menu-dropdown{display:none;position:absolute;z-index:15;top:100%;left:0;min-width:220px;max-height:min(70vh,520px);overflow:auto;background:#d2cec6;padding:10px 0;box-shadow:0 10px 20px #0002}
+    .menu-group:hover>.menu-dropdown,.menu-group:focus-within>.menu-dropdown,.menu-group.is-open>.menu-dropdown{display:block}
+    .menu-dropdown .menu-trigger{height:auto;width:100%;min-height:37px;justify-content:space-between;text-align:left;padding:9px 16px}
+    .menu-dropdown .menu-group{display:block;height:auto}
+    .menu-dropdown .menu-dropdown{top:0;left:100%;}
+    .sidebar-heading{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;border-bottom:1px solid #e8e8e8;background:transparent;text-align:left;padding:0 0 12px;margin:0 0 8px;color:#222;font-size:14px;font-weight:600;letter-spacing:.08em;cursor:pointer}
+    .sidebar-heading .menu-chevron{font-size:12px;color:#777}
+    .sidebar-categories{display:grid;gap:0}
+    .sidebar-group{display:block}
+    .sidebar-item{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;text-align:left;padding:9px 10px;color:#666;font-size:12px;cursor:pointer}
+    .sidebar-item:hover,.sidebar-item[aria-expanded="true"]{color:#555;background:#f6f4f1}
+    .sidebar-item .menu-chevron{font-size:10px;color:#888}
+    .sidebar-children{display:none;padding-left:12px}
+    .sidebar-group.is-open>.sidebar-children,.sidebar-root.is-open>.sidebar-children{display:grid}
+    .sidebar-children .sidebar-item{font-size:11px;padding:8px 10px;color:#777}
+    .sidebar-item.active{color:#3e3b35;font-weight:600;background:#f3f0eb}
+    .sidebar-categories .sidebar-item:hover,.sidebar-categories .sidebar-item[aria-expanded="true"]{color:#3e3b35}
+    .menu-row a:hover,.menu-row a.active,.menu-mobile a:hover,.menu-mobile a.active{color:#333}
+    .catalog-sidebar h2{border:0}
+    .menu-mobile{background:#d2cec6;justify-content:flex-start;overflow:visible;flex-wrap:wrap;height:auto;min-height:40px;white-space:normal;position:relative;z-index:12}
+    .menu-mobile .menu-group{height:40px}
+    .menu-mobile .menu-trigger{padding:0 10px;font-size:11px}
+    @media(max-width:620px){.menu-mobile{gap:0;padding:0 5px}.menu-mobile .menu-group{height:38px}.menu-dropdown{min-width:190px;max-height:65vh}.menu-dropdown .menu-dropdown{position:static;box-shadow:none;padding:0 0 0 10px}.catalog-sidebar{border-bottom:1px solid #eee}.sidebar-categories{grid-template-columns:1fr}.sidebar-heading{font-size:13px}}
     @media(max-width:850px){.catalog-layout{grid-template-columns:180px minmax(0,1fr);gap:18px}.catalog-sidebar{padding:18px 12px}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px}}
     @media(max-width:620px){.catalog-layout{grid-template-columns:1fr;gap:14px;margin-top:12px}.catalog-sidebar{padding:15px 12px}.sidebar-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}}
   </style>
@@ -90,8 +119,8 @@
         <button class="icon-btn" id="menuToggle" aria-label="開啟商品選單"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       </div>
     </div>
-    <nav class="menu-row"><a href="#home" data-page-link="home">首頁</a><a href="#catalog" data-page-link="catalog">商品頁</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog" data-category-menu>商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
-    <nav class="menu-mobile"><a href="#home" data-page-link="home">首頁</a><a href="#catalog" data-page-link="catalog">商品頁</a><a href="#catalog" data-filter-link="new">本週新品</a><a href="#catalog" data-filter-link="brand">品牌</a><a href="#catalog" data-filter-link="live">限時連線</a><a href="#catalog" data-filter-link="stock">現貨賣場</a><a href="#catalog" data-category-menu>商品分類</a><a href="#catalog" data-filter-link="korea">🇰🇷 韓國選品</a><a href="#catalog" data-filter-link="japan">🇯🇵 日本代購</a><a href="#catalog" data-filter-link="sale">限時特價</a></nav>
+    <nav class="menu-row" id="desktopMenu" aria-label="商品導覽"></nav>
+    <nav class="menu-mobile" id="mobileMenu" aria-label="商品導覽"></nav>
     <div class="searchbar" id="searchBar"><div class="wrap"><div class="searchbox"><input id="searchInput" type="search" placeholder="搜尋商品名稱"><button id="searchClear" aria-label="清除搜尋">✕</button></div></div></div>
   </header>
   <main id="top">
@@ -104,17 +133,9 @@
         <div class="tool-selects"><select id="sortSelect" aria-label="商品排序"><option value="new">商品排序　最新上架</option><option value="name">商品名稱　A–Z</option></select><select id="pageSize" aria-label="每頁顯示商品數量"><option value="12">每頁顯示 12 個</option><option value="24">每頁顯示 24 個</option></select></div>
       </div>
       <div class="catalog-layout">
-        <aside class="catalog-sidebar" aria-label="商品分類">
-          <h2>商品分類</h2>
-          <div class="sidebar-categories" id="sidebarCategories">
-            <button data-side-filter="all">全部商品</button>
-            <button data-side-filter="new">本週新品</button>
-            <button data-side-filter="live">限時連線</button>
-            <button data-side-filter="stock">現貨賣場</button>
-            <button data-side-filter="korea">🇰🇷 韓國選品</button>
-            <button data-side-filter="japan">🇯🇵 日本代購</button>
-            <button data-side-filter="sale">限時特價</button>
-          </div>
+        <aside class="catalog-sidebar" aria-label="全部商品">
+          <button class="sidebar-heading" id="sidebarHeading" aria-expanded="true"><span id="sidebarHeadingLabel">全部商品</span><span class="menu-chevron" aria-hidden="true">⌄</span></button>
+          <div class="sidebar-categories" id="sidebarCategories"></div>
 </aside>
         <div class="catalog-results">
           <div class="grid" id="productGrid"></div>
@@ -143,14 +164,12 @@
       {id:11,title:"adidas Originals 復古 Polo 上衣",brand:"adidas Originals",country:"korea",type:"預購",badge:"",img:"adidas-polo.jpg",date:20260323},
     ];
     function productImage(src){return /^https:\/\//i.test(src)?src:(src.startsWith("/")?src:"/"+src)}
-    let selectedFilter="all", selectedCategory="", categoryNames=[], cart=[], activeProduct=null;
+    let selectedFilter="all", selectedCategory="", categoryNames=[], koreanBrands=["MLB","MUCENT","Muah Muah","MATIN KIM","Mardi Mercredi","GLOWNY","OIOI","STAND OIL","emis","THISISNEVERTHAT","COVERNAT","mahagrid","SCULPTOR","Rest & Recreation","ADERERROR","Andersson Bell","MUSINSA STANDARD","Acme de la Vie","ROMANTIC CROWN","OY"], menuItems=[], cart=[], activeProduct=null;
     const grid=document.querySelector("#productGrid"), search=document.querySelector("#searchInput"), pageSize=document.querySelector("#pageSize"), sortSelect=document.querySelector("#sortSelect");
     const heartSvg='<svg viewBox="0 0 24 24"><path class="heart" d="M20.8 8.7c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/></svg>';
     const cartSvg='<svg viewBox="0 0 24 24"><path d="M3 4h2l2.1 11.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"/><circle cx="9.5" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>';
-    let koreanBrands=["MLB","MUCENT","Muah Muah","MATIN KIM","Mardi Mercredi","GLOWNY","OIOI","STAND OIL","emis","THISISNEVERTHAT","COVERNAT","mahagrid","SCULPTOR","Rest & Recreation","ADERERROR","Andersson Bell","MUSINSA STANDARD","Acme de la Vie","ROMANTIC CROWN","OY"];
     const brandSelect=document.querySelector("#brandSelect"),brandSelectWrap=document.querySelector("#brandSelectWrap");
     [...new Set([...koreanBrands,...products.map(p=>p.brand)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const option=document.createElement("option");option.value=name;option.textContent=name;brandSelect.appendChild(option)});
-    document.querySelectorAll("[data-side-filter]").forEach(button=>button.addEventListener("click",()=>{brandSelect.value="";setFilter(button.dataset.sideFilter)}));
     function filteredProducts(){
       let list=[...products];
       if(selectedFilter==="korea")list=list.filter(p=>p.country==="korea");
@@ -190,15 +209,17 @@
     }
     function openProduct(p){activeProduct=p;document.querySelector("#detailImage").src=productImage(p.img);document.querySelector("#detailImage").alt=p.title;document.querySelector("#detailTitle").textContent=p.title;document.querySelector("#detailTag").textContent=p.brand+" · "+(p.country==="korea"?"KOREA":"JAPAN");document.querySelector("#detailStatus").textContent=p.type;document.querySelector(".detail-info>p").textContent=p.description||"商品依頁面標示分為預購與現貨。也可提供 Musinsa 或韓國品牌商品連結，透過 LINE／IG 詢問代找。";document.querySelector(".detail-price").innerHTML=(p.price?'商品售價　<strong>NT$'+Number(p.price).toLocaleString("zh-TW")+'</strong>　':'商品狀態　')+'<span>'+p.type+'</span>';document.querySelector("#productDialog").showModal()}
     function showToast(message){const t=document.querySelector("#toast");t.textContent=message;t.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove("show"),1800)}
-    function setFilter(filter){selectedFilter=filter;selectedCategory="";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";document.querySelectorAll(".menu-row a,.menu-mobile a").forEach(a=>a.classList.toggle("active",a.dataset.filterLink===selectedFilter));document.querySelectorAll("[data-side-filter]").forEach(a=>a.classList.toggle("active",a.dataset.sideFilter===selectedFilter));document.querySelectorAll("[data-dynamic-category]").forEach(a=>a.classList.remove("active"));if(selectedFilter!=="brand")brandSelect.value="";render()}
+    function setFilter(filter){selectedFilter=filter;selectedCategory="";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===selectedFilter));brandSelectWrap.hidden=selectedFilter!=="brand";if(selectedFilter!=="brand")brandSelect.value="";render()}
     function showPage(id){const page=id==="catalog"?"catalog":"home";document.querySelector("#home").classList.toggle("page-hidden",page!=="home");document.querySelector("#catalog").classList.toggle("page-hidden",page!=="catalog");document.querySelectorAll("[data-page-link]").forEach(a=>a.classList.toggle("active",a.dataset.pageLink===page));if(location.hash!=="#"+page)history.replaceState(null,"","#"+page);if(page==="catalog")window.scrollTo({top:0,behavior:"smooth"})}
     document.querySelectorAll("[data-page-link]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPage(a.dataset.pageLink)}));
     document.querySelectorAll(".home-category").forEach(b=>b.addEventListener("click",()=>{selectedCategory=b.dataset.homeCategory;selectedFilter="all";showPage("catalog");render()}));
-    document.querySelectorAll("[data-category-menu]").forEach(a=>a.addEventListener("click",()=>{selectedCategory="";selectedFilter="all";showPage("catalog");render()}));
     document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.filter)));
-    document.querySelectorAll("[data-filter-link]").forEach(a=>a.addEventListener("click",()=>{showPage("catalog");setFilter(a.dataset.filter)}));
-    function renderCatalog(){const box=document.querySelector("#sidebarCategories");if(!box)return;box.querySelectorAll("[data-dynamic-category]").forEach(x=>x.remove());categoryNames.forEach(name=>{const b=document.createElement("button");b.textContent=name;b.dataset.dynamicCategory="1";b.dataset.category=name;b.className=selectedCategory===name?"active":"";b.onclick=()=>{selectedCategory=name;selectedFilter="all";brandSelect.value="";renderCatalog();render()};box.appendChild(b)})}
-    fetch("/api/catalog").then(r=>r.ok?r.json():null).then(data=>{if(!data)return;koreanBrands=data.brands||koreanBrands;categoryNames=data.categories||[];brandSelect.innerHTML='<option value="">全部品牌</option>';[...new Set([...koreanBrands,...products.map(p=>p.brand).filter(Boolean)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;brandSelect.appendChild(o)});renderCatalog()}).catch(()=>{});
+    function activateMenu(item){showPage("catalog");if(item.action==="category"){selectedFilter="all";selectedCategory=item.actionValue||item.label;brandSelect.value="";render();return}if(item.action==="brand"){setFilter("brand");if(item.actionValue){brandSelect.value=item.actionValue;render()}return}selectedCategory="";brandSelect.value="";setFilter(item.action||"all")}
+    function menuChildren(item){const children=menuItems.filter(x=>Number(x.parent_id)===Number(item.id));if(item.action==="all"&&!children.length)return categoryNames.map((name,index)=>({id:"fallback-cat-"+index,label:name,action:"category",actionValue:name,parent_id:item.id}));if(item.action==="brand"){const extra=children.map(x=>x.actionValue||x.label);return [...children,...koreanBrands.filter(x=>!extra.includes(x)).map((name,index)=>({id:"brand-"+index,label:name,action:"brand",actionValue:name,parent_id:item.id}))]}if(!children.length)return [{id:"fallback-"+item.id,label:"瀏覽全部「"+item.label+"」",action:item.action,actionValue:item.actionValue,parent_id:item.id}];return children}
+    function createMenuGroup(item,depth=0){const group=document.createElement("div");group.className="menu-group";const trigger=document.createElement("button");trigger.type="button";trigger.className="menu-trigger";trigger.setAttribute("aria-expanded","false");trigger.innerHTML='<span></span><span class="menu-chevron" aria-hidden="true">⌄</span>';trigger.firstElementChild.textContent=item.label;trigger.addEventListener("click",e=>{if(e.target.classList.contains("menu-chevron")){e.stopPropagation();group.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(group.classList.contains("is-open")))}else activateMenu(item)});const children=menuChildren(item),dropdown=document.createElement("div");dropdown.className="menu-dropdown";children.forEach(child=>dropdown.appendChild(createMenuGroup(child,depth+1)));group.append(trigger,dropdown);return group}
+    function createSideGroup(item,depth=0){const group=document.createElement("div");group.className="sidebar-group";const children=menuChildren(item),row=document.createElement("div");row.className="sidebar-item-row";const label=document.createElement("button");label.type="button";label.className="sidebar-item";label.innerHTML='<span></span><span class="menu-chevron" aria-hidden="true">⌄</span>';label.firstElementChild.textContent=item.label;label.firstElementChild.addEventListener("click",()=>activateMenu(item));label.addEventListener("click",e=>{if(e.target===label||e.target.classList.contains("menu-chevron")){group.classList.toggle("is-open");label.setAttribute("aria-expanded",group.classList.contains("is-open"))}});row.appendChild(label);const sub=document.createElement("div");sub.className="sidebar-children";children.forEach(child=>sub.appendChild(createSideGroup(child,depth+1)));group.append(row,sub);return group}
+    function renderMenus(){const roots=menuItems.filter(x=>!x.parent_id).sort((a,b)=>a.sort_order-b.sort_order||a.id-b.id),desktop=document.querySelector("#desktopMenu"),mobile=document.querySelector("#mobileMenu"),side=document.querySelector("#sidebarCategories");desktop.innerHTML="";mobile.innerHTML="";side.innerHTML="";roots.filter(x=>x.placement!=="sidebar").forEach(root=>{desktop.appendChild(createMenuGroup(root));mobile.appendChild(createMenuGroup(root))});const all=roots.find(x=>x.action==="all"||x.label==="全部商品");if(all){document.querySelector("#sidebarHeadingLabel").textContent=all.label;const children=menuChildren(all);const allChildren=document.createElement("div");allChildren.className="sidebar-children sidebar-root is-open";children.forEach(child=>allChildren.appendChild(createSideGroup(child,1)));side.appendChild(allChildren)}roots.filter(x=>x!==all&&x.placement!=="header").forEach(root=>side.appendChild(createSideGroup(root)));document.querySelector("#sidebarHeading").onclick=e=>{if(e.target.classList.contains("menu-chevron")){const expanded=document.querySelector("#sidebarHeading").getAttribute("aria-expanded")==="true";document.querySelector("#sidebarHeading").setAttribute("aria-expanded",String(!expanded));side.querySelector(".sidebar-root")?.classList.toggle("is-open",!expanded)}else if(all)activateMenu(all)}}
+    fetch("/api/catalog").then(r=>r.ok?r.json():null).then(data=>{if(!data)return;koreanBrands=data.brands?.length?data.brands:koreanBrands;categoryNames=data.categories||[];menuItems=data.menus||[];brandSelect.innerHTML='<option value="">全部品牌</option>';[...new Set([...koreanBrands,...products.map(p=>p.brand).filter(Boolean)])].sort((a,b)=>a.localeCompare(b,"zh-Hant")).forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;brandSelect.appendChild(o)});renderMenus()}).catch(()=>{});
     brandSelect.addEventListener("change",render);search.addEventListener("input",render);pageSize.addEventListener("change",render);sortSelect.addEventListener("change",render);
     document.querySelector("#searchToggle").addEventListener("click",()=>{const bar=document.querySelector("#searchBar");bar.classList.toggle("open");if(bar.classList.contains("open"))search.focus()});
     document.querySelector("#searchClear").addEventListener("click",()=>{search.value="";render();search.focus()});
