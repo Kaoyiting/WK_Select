@@ -75,7 +75,13 @@ async function requireAdmin(request, env) {
   if (!env.ADMIN_SESSION_SECRET) return { error: json({ error: '管理員尚未完成設定' }, 503) };
   const session = await readSession(request, env.ADMIN_SESSION_SECRET);
   if (!session) return { error: json({ error: '請先登入管理員帳號' }, 401) };
-  if (!sameOrigin(request) || request.headers.get('X-Admin-CSRF') !== session.csrf) return { error: json({ error: '安全驗證失敗，請重新登入' }, 403) };
+  // Read-only requests only need a valid signed session. Browsers commonly
+  // omit Origin on GET, so requiring Origin/CSRF here prevents the admin UI
+  // from loading its products immediately after a successful login.
+  if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method.toUpperCase()) &&
+      (!sameOrigin(request) || request.headers.get('X-Admin-CSRF') !== session.csrf)) {
+    return { error: json({ error: '安全驗證失敗，請重新登入' }, 403) };
+  }
   return { session };
 }
 function mapProduct(row) {
