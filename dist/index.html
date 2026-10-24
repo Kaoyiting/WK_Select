@@ -40,10 +40,14 @@
     @media(max-width:620px){.menu-mobile{gap:18px}.filters{gap:12px 14px;justify-content:flex-start}.filters .filter{font-size:10px}.group-label{padding-left:9px}.brand-select-row{padding-top:4px}}
   </style>
   <style>
-    .promo-content{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;white-space:nowrap}
-    .promo-content a{color:inherit;text-decoration:underline;text-underline-offset:2px}
-    .promo-divider{opacity:.6}
-    @media(max-width:620px){.promo{overflow:hidden}.promo-content{justify-content:flex-start;overflow-x:auto;padding:0 12px;gap:9px;font-size:9px}.promo-content::-webkit-scrollbar{display:none}.catalog-sidebar{padding:12px 0}.sidebar-categories button.active{padding-left:8px}}
+    .promo{perspective:700px;overflow:hidden}
+    .promo-rotator{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+    .promo-message{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:5px;padding:0 14px;white-space:nowrap;backface-visibility:hidden;visibility:hidden;opacity:0;transform:rotateX(-90deg);transform-origin:center center;transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .4s ease,visibility .55s}
+    .promo-message.is-active{visibility:visible;opacity:1;transform:rotateX(0)}
+    .promo-message.is-outgoing{visibility:visible;opacity:0;transform:rotateX(90deg)}
+    .promo-message a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:620px){.promo-message{justify-content:center;padding:0 8px;font-size:9px}}
+    @media(prefers-reduced-motion:reduce){.promo-message{transition:none}}
     .catalog-tools{max-width:none;margin-bottom:22px}
     .catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px;align-items:start;margin-top:24px}
     .catalog-sidebar{padding:22px 18px;border:0;background:transparent}
@@ -65,7 +69,11 @@
   </style>
 </head>
 <body>
-  <div class="promo"><div class="promo-content"><span>全館滿 NT$1,800 免運</span><span class="promo-divider">｜</span><span>Olive Young Black Friday 11/1–11/7</span><span class="promo-divider">｜</span><span>歡迎透過 <a href="https://linktr.ee/wk.select.kr" target="_blank" rel="noopener">LINE</a>／<a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">IG</a> 詢問商品</span></div></div>
+  <div class="promo"><div class="promo-rotator" id="promoRotator" aria-live="polite" aria-atomic="true">
+    <div class="promo-message is-active">全館滿 NT$1,800 免運</div>
+    <div class="promo-message">歡迎透過 <a href="https://linktr.ee/wk.select.kr" target="_blank" rel="noopener">LINE</a>／<a href="https://www.instagram.com/wk.select.kr/" target="_blank" rel="noopener">IG</a> 詢問商品</div>
+    <div class="promo-message">Olive Young Black Friday 11/1–11/7</div>
+  </div></div>
   <header class="header">
     <div class="wrap head-row">
       <a class="brand" href="#top" aria-label="WK.SLELCT 首頁"><img src="assets/products/wk-logo.jpg" alt="WK 品牌標誌"><span class="brand-word">WK.SLELCT<small>KOREA SELECT SHOP</small></span></a>
@@ -189,6 +197,8 @@
     document.querySelector("#copyInquiry").addEventListener("click",async()=>{if(!cart.length){showToast("請先加入購物車");return}const text="WK.SLELCT 訂購內容\n"+cart.map((p,i)=>(i+1)+". "+p.title+" × "+p.quantity+"（"+p.type+"）").join("\n")+"\n請協助處理下單，謝謝！";try{await navigator.clipboard.writeText(text);showToast("訂購內容已複製，可貼到 IG 私訊下單")}catch{showToast("複製失敗，請直接前往 IG 下單")}});
     document.querySelector("#moreButton").addEventListener("click",()=>{pageSize.value="24";render()});
     render();
+    const promoMessages=[...document.querySelectorAll(".promo-message")];
+    if(promoMessages.length>1){let promoIndex=0;setInterval(()=>{const current=promoMessages[promoIndex];current.classList.remove("is-active");current.classList.add("is-outgoing");promoIndex=(promoIndex+1)%promoMessages.length;const next=promoMessages[promoIndex];next.classList.remove("is-outgoing");next.classList.add("is-active");setTimeout(()=>current.classList.remove("is-outgoing"),650)},3800)}
   </script>
 </body>
 </html>
