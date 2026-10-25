@@ -139,6 +139,31 @@ function validProduct(p) {
     typeof (p.sizeGuide??'')==='string' && (p.sizeGuide??'').length<=10000;
 }
 async function handleApi(request, env, url) {
+  if (url.pathname === '/api/711-stores' && request.method === 'GET') {
+    const cities = ['基隆市','台北市','新北市','桃園市','新竹市','新竹縣','苗栗縣','台中市','彰化縣','南投縣','雲林縣','嘉義縣','嘉義市','台南市','高雄市','屏東縣','宜蘭縣','花蓮縣','台東縣','連江縣','金門縣','澎湖縣'];
+    const city = url.searchParams.get('city') || '';
+    if (!cities.includes(city)) return json({ error: '請先選擇有效的縣市。' }, 400);
+    const cacheKey = new Request('https://wk-select.internal/api/711-stores?city=' + encodeURIComponent(city));
+    const cache = caches.default;
+    const cached = await cache.match(cacheKey);
+    if (cached) return cached;
+    const form = new URLSearchParams({ commandid: 'SearchStore', city, StoreName: '%' });
+    const upstream = await fetch('https://emap.pcsc.com.tw/EMapSDK.aspx', {
+      method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }, body: form.toString()
+    });
+    if (!upstream.ok) return json({ error: '暫時無法取得 7-ELEVEN 門市資料，請稍後再試。' }, 502);
+    const xml = await upstream.text();
+    if (xml.length > 12_000_000 || !xml.includes('<GeoPosition')) return json({ error: '7-ELEVEN 門市資料格式暫時無法讀取。' }, 502);
+    const unescape = value => value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").trim();
+    const stores = [...xml.matchAll(/<GeoPosition\b[^>]*>([\s\S]*?)<\/GeoPosition>/gi)].map(match => {
+      const field = name => unescape(match[1].match(new RegExp('<' + name + '>([\\s\\S]*?)<\\/' + name + '>', 'i'))?.[1] || '');
+      return { id: field('POIID'), name: field('POIName'), address: field('Address') };
+    }).filter(store => /^\d{4,8}$/.test(store.id) && store.name && store.address);
+    if (!stores.length) return json({ error: '目前沒有取得這個縣市的門市，請稍後再試。' }, 502);
+    const result = json({ city, stores }, 200, { 'Cache-Control': 'public, max-age=21600' });
+    await cache.put(cacheKey, result.clone());
+    return result;
+  }
   if (url.pathname === '/api/products' && request.method === 'GET') {
     const { results = [] } = await env.DB.prepare("SELECT * FROM products WHERE status='published' ORDER BY date DESC,id DESC").all();
     return json({ products: results.map(mapProduct) }, 200, { 'Cache-Control': 'public, max-age=30' });
@@ -151,10 +176,11 @@ async function handleApi(request, env, url) {
     const email = typeof payload?.email === 'string' ? payload.email.trim() : '';
     const shipping = payload?.shipping;
     const storeName = typeof payload?.storeName === 'string' ? payload.storeName.trim() : '';
+    const storeId = typeof payload?.storeId === 'string' ? payload.storeId.trim() : '';
     const payment = payload?.payment;
     const note = typeof payload?.note === 'string' ? payload.note.trim() : '';
     const requested = payload?.items;
-    if (name.length < 2 || name.length > 80 || !/^[+0-9()\-\s]{9,20}$/.test(phone) || (email && (email.length > 160 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) || !['711_cod','711_prepaid'].includes(shipping) || !['711_cod','bank_transfer'].includes(payment) || (shipping === '711_cod' && payment !== '711_cod') || storeName.length < 2 || storeName.length > 160 || note.length > 1000 || !Array.isArray(requested) || !requested.length || requested.length > 30) {
+    if (name.length < 2 || name.length > 80 || !/^[+0-9()\-\s]{9,20}$/.test(phone) || (email && (email.length > 160 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) || !['711_cod','711_prepaid'].includes(shipping) || !['711_cod','bank_transfer'].includes(payment) || (shipping === '711_cod' && payment !== '711_cod') || !/^\d{4,8}$/.test(storeId) || storeName.length < 2 || storeName.length > 160 || note.length > 1000 || !Array.isArray(requested) || !requested.length || requested.length > 30) {
       return json({ error: '請完整填寫收件人、電話、超商門市與付款方式。' }, 400);
     }
     const items = [];
