@@ -346,8 +346,9 @@ async function handleApi(request, env, url) {
             if(!row||typeof row!=='object'||Array.isArray(row))return json({error:'公告或投影片資料格式不正確。'},400);
             const main=isAnnouncement?row.text:row.image,secondary=isAnnouncement?row.url:row.alt,limit=isAnnouncement?160:500;
             if(typeof main!=='string'||main.trim().length>limit||typeof secondary!=='string'||secondary.trim().length>(isAnnouncement?1000:300))return json({error:'公告文字、圖片或連結格式不正確。'},400);
-            if(isAnnouncement&&secondary.trim()){let valid=secondary.trim().startsWith('/')&&!secondary.trim().startsWith('//');if(!valid){try{const parsed=new URL(secondary.trim());valid=parsed.protocol==='https:'||parsed.protocol==='http:'}catch{}}if(!valid)return json({error:'公告連結需使用 http 或 https。'},400)}
-            if(!isAnnouncement&&main.trim()){let valid=main.trim().startsWith('/')&&!main.trim().startsWith('//');if(!valid){try{const parsed=new URL(main.trim());valid=parsed.protocol==='https:'||parsed.protocol==='http:'}catch{}}if(!valid)return json({error:'投影片圖片需使用有效圖片網址。'},400)}
+            const validUrl=(raw,relative=false)=>{const value=raw.trim();if(value.startsWith('/')&&!value.startsWith('//'))return true;if(relative&&!/^[a-z][a-z\d+.-]*:/i.test(value)&&!value.startsWith('//')&&!value.split(/[?#]/)[0].split('/').includes('..'))return true;try{const parsed=new URL(value);return parsed.protocol==='https:'||parsed.protocol==='http:'}catch{return false}};
+            if(isAnnouncement&&secondary.trim()&&!validUrl(secondary))return json({error:'公告連結需使用 http 或 https。'},400);
+            if(!isAnnouncement&&main.trim()&&!validUrl(main,true))return json({error:'投影片圖片需使用有效圖片網址。'},400);
             const sortOrder=Number(row.sortOrder)||cleaned.length+1;cleaned.push(isAnnouncement?{text:main.trim(),url:secondary.trim(),sortOrder,enabled:row.enabled!==false}:{image:main.trim(),alt:secondary.trim(),sortOrder,enabled:row.enabled!==false});
           }
           content[key]=cleaned.sort((a,b)=>a.sortOrder-b.sortOrder);continue;
@@ -355,7 +356,7 @@ async function handleApi(request, env, url) {
         if(typeof incoming[key]!=='string')return json({error:'欄位「'+key+'」必須是文字。'},400);
         const value=incoming[key].trim(),limit=imageKeys.has(key)?500:urlKeys.has(key)?1000:6000;
         if(value.length>limit)return json({error:'欄位內容過長，請縮短後再儲存。'},400);
-        if((urlKeys.has(key)||imageKeys.has(key))&&value){let valid=value.startsWith('/')&&!value.startsWith('//');if(!valid){try{const parsed=new URL(value);valid=parsed.protocol==='https:'||parsed.protocol==='http:'}catch{}}if(!valid)return json({error:'連結或圖片網址格式不正確。'},400)}
+        if((urlKeys.has(key)||imageKeys.has(key))&&value){let valid=value.startsWith('/')&&!value.startsWith('//');if(!valid&&imageKeys.has(key)&&! /^[a-z][a-z\d+.-]*:/i.test(value)&&!value.startsWith('//')&&!value.split(/[?#]/)[0].split('/').includes('..'))valid=true;if(!valid){try{const parsed=new URL(value);valid=parsed.protocol==='https:'||parsed.protocol==='http:'}catch{}}if(!valid)return json({error:'連結或圖片網址格式不正確。'},400)}
         content[key]=value;
       }
       await env.DB.prepare('INSERT INTO store_site_content(content_key,value_json) VALUES(?,?) ON CONFLICT(content_key) DO UPDATE SET value_json=excluded.value_json,updated_at=CURRENT_TIMESTAMP').bind('main',JSON.stringify(content)).run();
