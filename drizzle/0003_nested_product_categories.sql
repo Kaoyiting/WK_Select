@@ -3,4 +3,4 @@ VALUES(21,'商品類別','category','',1,'both',1);
 
 UPDATE store_menu_items
 SET parent_id=21
-WHERE parent_id=1 AND action='category';
+WHERE parent_id=1 AND action='category' AND id<>21;
