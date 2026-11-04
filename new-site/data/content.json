@@ -1,0 +1,55 @@
+{
+  "announcementRows": [
+    {
+      "text": "全館滿 NT$1,800 免運",
+      "sortOrder": 1,
+      "enabled": true
+    },
+    {
+      "text": "歡迎透過 LINE／IG 詢問商品",
+      "sortOrder": 2,
+      "enabled": true
+    },
+    {
+      "text": "Olive Young Black Friday 11/1–11/7",
+      "sortOrder": 3,
+      "enabled": true
+    }
+  ],
+  "logoUrl": "assets/products/wk-logo.jpg",
+  "logoAlt": "WK 品牌標誌",
+  "brandName": "WK.SLELCT",
+  "brandTagline": "KOREA SELECT SHOP",
+  "heroSlides": [
+    {
+      "image": "assets/products/adidas-ringer-tee.jpg",
+      "alt": "韓系日常穿搭",
+      "sortOrder": 1,
+      "enabled": true,
+      "aspectRatio": "original",
+      "fit": "contain"
+    },
+    {
+      "id": "anti-fraud-reminder",
+      "image": "/assets/anti-fraud.svg",
+      "alt": "反詐騙提醒",
+      "enabled": true,
+      "sortOrder": 100,
+      "aspectRatio": "16/9",
+      "fit": "contain"
+    }
+  ],
+  "bestSellersTitle": "熱銷商品",
+  "catalogSubtitle": "把質感日常放進你的衣櫥",
+  "emptyText": "目前此分類沒有上架商品，歡迎瀏覽其他選品。",
+  "footerBlock1": "關於我們\nWK.SLELCT 韓國選品\n韓系穿搭｜韓國服飾｜韓國代購\n客服回覆時間：13:00～21:00",
+  "footerBlock2": "服務規則\n[寄送政策](#policy/delivery)\n[退換貨政策](#policy/returns)",
+  "footerBlock3": "聯絡我們\n[官方 LINE](https://linktr.ee/wk.select.kr)\n[INSTAGRAM](https://www.instagram.com/wk.select.kr/)",
+  "footerPaymentMethods": "7-ELEVEN 取貨付款\n銀行轉帳",
+  "footerLayoutVersion": "2",
+  "footerCopyright": "© 2026 WK.SLELCT. All rights reserved.",
+  "ckeditorLicenseKey": "",
+  "productContentHtml": "<h3>【預購商品】</h3><p>預購商品約 30 日工作天寄出（不含例假日）</p><p>下單前需確認款式及尺寸，恕無提供取消訂單及退換貨 🙌🏻</p><h3>【CUSTOMER SERVICE】</h3><p>官方 LINE 詢問 👉🏻 <a href=\"https://lin.ee/nXszmUz\">https://lin.ee/nXszmUz</a></p><p>客服回覆時間：13:00～21:00</p><h3>【MUST READ】</h3><p>購買前請詳閱「寄送與退換貨規則」，下單即代表同意賣場規定。</p><h3>送貨方式</h3><ol><li>7-11 超商取貨付款（運費 NT$60）</li><li>7-11 超商取貨不付款（運費 NT$60）</li></ol><p>現貨、預購商品一起下單時，會待整筆訂單商品到齊後一起寄出。如想先收到現貨商品，請分開下單。</p><h3>付款方式</h3><ul><li>7-11 取貨付款</li><li>銀行轉帳（客服提供匯款資訊）</li></ul><p>目前尚未串接線上金流。</p>",
+  "deliveryPolicyHtml": "<h2>出貨時間</h2><p>現貨商品：下單後 3 天內出貨。</p><p>預購商品：約 30 日工作天寄出（不含例假日）。請先詢問運送所需時間，急單請選擇現貨商品。</p><h2>配送方式與運費</h2><p>7-11 超商取貨付款、超商取貨不付款。</p><p>運費 NT$60，商品小計滿 NT$1,800 免運；實際費用以結帳頁面為準。</p><h2>合併出貨</h2><p>現貨與預購商品一起下單時，會待整筆訂單商品到齊後一起寄出。如想先收到現貨商品，請分開下單。</p>",
+  "returnsPolicyHtml": "<h2>退換貨聯繫</h2><p>如商品有瑕疵、收到錯誤商品，或有退換貨需求，請透過官方客服提供訂單編號與商品狀況，我們將協助確認及處理。</p><p><a href=\"https://linktr.ee/wk.select.kr\">聯絡 WK.SLELCT 官方客服</a></p><p>客服回覆時間：13:00～21:00。</p>"
+}

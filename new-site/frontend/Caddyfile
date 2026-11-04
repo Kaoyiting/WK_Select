@@ -1,0 +1,16 @@
+{$SITE_HOST:localhost} {
+    handle /api/* {
+        reverse_proxy api:8000
+    }
+    handle /media/* {
+        reverse_proxy api:8000
+    }
+    handle {
+        @html not path /assets/*
+        header @html Cache-Control "no-store"
+        root * /srv
+        try_files {path} /index.html
+        file_server
+    }
+    encode zstd gzip
+}

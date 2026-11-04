@@ -1,0 +1,79 @@
+name: wk-select-new
+services:
+  web:
+    build: ./frontend
+    ports:
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8089}:80"
+      - "${TLS_BIND:-127.0.0.1}:${TLS_PORT:-8449}:443"
+    environment:
+      SITE_HOST: ${SITE_HOST:-:80}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+  api:
+    build: ./backend
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      DATABASE_URL: postgresql+psycopg://wk:${DB_PASSWORD:?set DB_PASSWORD}@db/wk_select_new
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET}
+      LOCAL_ALLOWED_ORIGINS: ${LOCAL_ALLOWED_ORIGINS:-}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:8089}
+      ECPAY_ORDER_TESTING_ENABLED: ${ECPAY_ORDER_TESTING_ENABLED:-false}
+      ECPAY_SANDBOX_ENABLED: ${ECPAY_SANDBOX_ENABLED:-true}
+      ECPAY_SANDBOX_CALLBACK_ORIGIN: ${ECPAY_SANDBOX_CALLBACK_ORIGIN:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      STORAGE_BACKEND: ${STORAGE_BACKEND:-local}
+      R2_ENDPOINT_URL: ${R2_ENDPOINT_URL:-}
+      R2_BUCKET: ${R2_BUCKET:-}
+      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-}
+      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-}
+    volumes:
+      - uploads:/app/uploads
+      - ./data:/app/data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready',timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  payment-worker:
+    build: ./backend
+    command: ["python", "-m", "app.modules.payments.worker"]
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      DATABASE_URL: postgresql+psycopg://wk:${DB_PASSWORD:?set DB_PASSWORD}@db/wk_select_new
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET}
+      ECPAY_ORDER_TESTING_ENABLED: ${ECPAY_ORDER_TESTING_ENABLED:-false}
+      ECPAY_SANDBOX_ENABLED: ${ECPAY_SANDBOX_ENABLED:-true}
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: wk_select_new
+      POSTGRES_USER: wk_bootstrap
+      POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD:?set DB_ADMIN_PASSWORD}
+      APP_DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sh:/docker-entrypoint-initdb.d/10-app.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wk_bootstrap -d wk_select_new"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+volumes:
+  pg_data:
+  uploads:
+  caddy_data:
+  caddy_config:

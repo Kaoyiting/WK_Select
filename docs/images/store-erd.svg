@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1090" viewBox="0 0 1280 1090" role="img" aria-labelledby="title desc">
+  <title id="title">E-R Model WK.SLELCT Store</title>
+  <desc id="desc">Database tables, fields, data types, and crow's foot relationships for the WK.SLELCT shopping website.</desc>
+  <style>
+    text { font-family: Arial, 'Noto Sans', sans-serif; fill: #222; }
+    .title { font-size: 22px; font-weight: 700; }
+    .table { fill: #fff; stroke: #333; stroke-width: 1.4; }
+    .head { stroke: #333; stroke-width: 1.4; }
+    .green { fill: #d9e8d9; }
+    .yellow { fill: #ffe49b; }
+    .purple { fill: #e3d6e8; }
+    .table-name { font-size: 14px; font-weight: 700; }
+    .field { font-family: Arial, Consolas, monospace; font-size: 12px; }
+    .relation { fill: none; stroke: #555; stroke-width: 1.4; stroke-dasharray: 3 4; stroke-linecap: round; stroke-linejoin: round; }
+    .note { font-size: 11px; fill: #555; }
+  </style>
+  <defs>
+    <marker id="one" viewBox="-1 -7 2 14" refX="0" refY="0" markerWidth="8" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 -6 V6" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="none"/>
+    </marker>
+    <marker id="zero-one" viewBox="-12 -7 12 14" refX="0" refY="0" markerWidth="12" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto">
+      <circle cx="-7" cy="0" r="3" fill="#fff" stroke="#333" stroke-width="1.3" stroke-dasharray="none"/>
+      <path d="M0 -6 V6" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="none"/>
+    </marker>
+    <marker id="zero-many" viewBox="-17 -7 17 14" refX="0" refY="0" markerWidth="17" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto">
+      <circle cx="-13" cy="0" r="3" fill="#fff" stroke="#333" stroke-width="1.3" stroke-dasharray="none"/>
+      <path d="M-9 -6 L0 0 M-9 0 L0 0 M-9 6 L0 0" fill="none" stroke="#333" stroke-width="1.3" stroke-dasharray="none"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="1090" fill="#fff"/>
+  <text x="28" y="42" class="title">E-R Model WK.SLELCT Store</text>
+
+  <!-- Relationships: drawn behind the table boxes -->
+  <g class="relation">
+    <path d="M200 350 V450" marker-start="url(#one)" marker-end="url(#zero-many)"/>
+    <path d="M350 300 H420 V580 H490" marker-start="url(#one)" marker-end="url(#zero-many)"/>
+    <path d="M350 560 H490" marker-start="url(#one)" marker-end="url(#zero-many)"/>
+    <path d="M640 350 V450" marker-start="url(#one)" marker-end="url(#zero-many)"/>
+    <path d="M790 220 H930" marker-start="url(#zero-many)" marker-end="url(#one)"/>
+    <path d="M1080 350 V450" marker-start="url(#zero-one)" marker-end="url(#zero-one)"/>
+    <path d="M790 300 H850 V870 H930" marker-start="url(#one)" marker-end="url(#zero-one)"/>
+    <path d="M490 300 H420 V870 H490" marker-start="url(#one)" marker-end="url(#zero-one)"/>
+    <path d="M350 900 H420 V1040 H850 V900 H930" marker-start="url(#one)" marker-end="url(#zero-many)"/>
+  </g>
+
+  <!-- products -->
+  <g>
+    <rect x="50" y="130" width="300" height="220" rx="10" class="table"/>
+    <rect x="50" y="130" width="300" height="32" rx="9" class="head green"/>
+    <text x="200" y="151" text-anchor="middle" class="table-name">products</text>
+    <path d="M50 194 H350 M50 226 H350 M50 258 H350 M50 290 H350 M50 322 H350" stroke="#777" stroke-width=".7"/>
+    <text x="64" y="185" class="field">id : varchar(36) [PK]</text>
+    <text x="64" y="217" class="field">title : varchar(240)</text>
+    <text x="64" y="249" class="field">brand : varchar(120)</text>
+    <text x="64" y="281" class="field">category : varchar(120)</text>
+    <text x="64" y="313" class="field">price_amount : bigint</text>
+    <text x="64" y="345" class="field">gallery : json</text>
+  </g>
+
+  <!-- orders -->
+  <g>
+    <rect x="490" y="130" width="300" height="220" rx="10" class="table"/>
+    <rect x="490" y="130" width="300" height="32" rx="9" class="head yellow"/>
+    <text x="640" y="151" text-anchor="middle" class="table-name">orders</text>
+    <path d="M490 194 H790 M490 226 H790 M490 258 H790 M490 290 H790 M490 322 H790" stroke="#777" stroke-width=".7"/>
+    <text x="504" y="185" class="field">id : varchar(36) [PK]</text>
+    <text x="504" y="217" class="field">member_id : varchar(36) [FK]</text>
+    <text x="504" y="249" class="field">order_number : varchar(40)</text>
+    <text x="504" y="281" class="field">status : varchar(20)</text>
+    <text x="504" y="313" class="field">total_amount : bigint</text>
+    <text x="504" y="345" class="field">created_at : timestamptz</text>
+  </g>
+
+  <!-- members -->
+  <g>
+    <rect x="930" y="130" width="300" height="220" rx="10" class="table"/>
+    <rect x="930" y="130" width="300" height="32" rx="9" class="head green"/>
+    <text x="1080" y="151" text-anchor="middle" class="table-name">members</text>
+    <path d="M930 194 H1230 M930 226 H1230 M930 258 H1230 M930 290 H1230 M930 322 H1230" stroke="#777" stroke-width=".7"/>
+    <text x="944" y="185" class="field">id : varchar(36) [PK]</text>
+    <text x="944" y="217" class="field">login_email : varchar(254)</text>
+    <text x="944" y="249" class="field">email : varchar(254)</text>
+    <text x="944" y="281" class="field">display_name : varchar(120)</text>
+    <text x="944" y="313" class="field">status : varchar(20)</text>
+    <text x="944" y="345" class="field">password_hash : text</text>
+  </g>
+
+  <!-- product_variants -->
+  <g>
+    <rect x="50" y="450" width="300" height="220" rx="10" class="table"/>
+    <rect x="50" y="450" width="300" height="32" rx="9" class="head purple"/>
+    <text x="200" y="471" text-anchor="middle" class="table-name">product_variants</text>
+    <path d="M50 514 H350 M50 546 H350 M50 578 H350 M50 610 H350 M50 642 H350" stroke="#777" stroke-width=".7"/>
+    <text x="64" y="505" class="field">id : varchar(36) [PK]</text>
+    <text x="64" y="537" class="field">product_id : varchar(36) [FK]</text>
+    <text x="64" y="569" class="field">color : varchar(120)</text>
+    <text x="64" y="601" class="field">size : varchar(80)</text>
+    <text x="64" y="633" class="field">stock_qty : integer</text>
+    <text x="64" y="665" class="field">enabled : boolean</text>
+  </g>
+
+  <!-- order_items -->
+  <g>
+    <rect x="490" y="450" width="300" height="260" rx="10" class="table"/>
+    <rect x="490" y="450" width="300" height="32" rx="9" class="head purple"/>
+    <text x="640" y="471" text-anchor="middle" class="table-name">order_items</text>
+    <path d="M490 514 H790 M490 546 H790 M490 578 H790 M490 610 H790 M490 642 H790 M490 674 H790" stroke="#777" stroke-width=".7"/>
+    <text x="504" y="505" class="field">id : varchar(36) [PK]</text>
+    <text x="504" y="537" class="field">order_id : varchar(36) [FK]</text>
+    <text x="504" y="569" class="field">product_id : varchar(36) [FK]</text>
+    <text x="504" y="601" class="field">variant_id : varchar(36) [FK]</text>
+    <text x="504" y="633" class="field">unit_amount : bigint</text>
+    <text x="504" y="665" class="field">quantity : integer</text>
+    <text x="504" y="697" class="field">title : varchar(240)</text>
+  </g>
+
+  <!-- customers -->
+  <g>
+    <rect x="930" y="450" width="300" height="220" rx="10" class="table"/>
+    <rect x="930" y="450" width="300" height="32" rx="9" class="head green"/>
+    <text x="1080" y="471" text-anchor="middle" class="table-name">customers</text>
+    <path d="M930 514 H1230 M930 546 H1230 M930 578 H1230 M930 610 H1230 M930 642 H1230" stroke="#777" stroke-width=".7"/>
+    <text x="944" y="505" class="field">id : varchar(36) [PK]</text>
+    <text x="944" y="537" class="field">member_id : varchar(36) [FK, UQ]</text>
+    <text x="944" y="569" class="field">name : varchar(120)</text>
+    <text x="944" y="601" class="field">phone : varchar(30)</text>
+    <text x="944" y="633" class="field">email : varchar(254)</text>
+    <text x="944" y="665" class="field">notes : text</text>
+  </g>
+
+  <!-- admin_accounts -->
+  <g>
+    <rect x="50" y="790" width="300" height="220" rx="10" class="table"/>
+    <rect x="50" y="790" width="300" height="32" rx="9" class="head green"/>
+    <text x="200" y="811" text-anchor="middle" class="table-name">admin_accounts</text>
+    <path d="M50 854 H350 M50 886 H350 M50 918 H350" stroke="#777" stroke-width=".7"/>
+    <text x="64" y="845" class="field">id : varchar(36) [PK]</text>
+    <text x="64" y="877" class="field">username : varchar(80)</text>
+    <text x="64" y="909" class="field">password_hash : text</text>
+    <text x="64" y="941" class="field">status : varchar(20)</text>
+  </g>
+
+  <!-- payments -->
+  <g>
+    <rect x="490" y="790" width="300" height="220" rx="10" class="table"/>
+    <rect x="490" y="790" width="300" height="32" rx="9" class="head yellow"/>
+    <text x="640" y="811" text-anchor="middle" class="table-name">payments</text>
+    <path d="M490 854 H790 M490 886 H790 M490 918 H790 M490 950 H790" stroke="#777" stroke-width=".7"/>
+    <text x="504" y="845" class="field">id : varchar(36) [PK]</text>
+    <text x="504" y="877" class="field">order_id : varchar(36) [FK, UQ]</text>
+    <text x="504" y="909" class="field">status : varchar(30)</text>
+    <text x="504" y="941" class="field">amount : bigint</text>
+    <text x="504" y="973" class="field">refunded_amount : bigint</text>
+  </g>
+
+  <!-- shipments -->
+  <g>
+    <rect x="930" y="790" width="300" height="220" rx="10" class="table"/>
+    <rect x="930" y="790" width="300" height="32" rx="9" class="head yellow"/>
+    <text x="1080" y="811" text-anchor="middle" class="table-name">shipments</text>
+    <path d="M930 854 H1230 M930 886 H1230 M930 918 H1230 M930 950 H1230" stroke="#777" stroke-width=".7"/>
+    <text x="944" y="845" class="field">id : varchar(36) [PK]</text>
+    <text x="944" y="877" class="field">order_id : varchar(36) [FK, UQ]</text>
+    <text x="944" y="909" class="field">confirmed_by : varchar(36) [FK]</text>
+    <text x="944" y="941" class="field">tracking_number : varchar(100)</text>
+    <text x="944" y="973" class="field">shipped_at : timestamptz</text>
+  </g>
+
+  <text x="28" y="1060" class="note">PK: primary key  |  FK: foreign key  |  UQ: unique value</text>
+</svg>

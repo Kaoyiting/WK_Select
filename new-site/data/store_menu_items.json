@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "label": "全部商品",
+    "action": "all",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 0,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 14,
+    "label": "本週新品",
+    "action": "new",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 10,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 15,
+    "label": "品牌",
+    "action": "brand",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 20,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 17,
+    "label": "現貨專區",
+    "action": "stock",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 40,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 18,
+    "label": "🇰🇷 韓國選品",
+    "action": "korea",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 50,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 19,
+    "label": "🇯🇵 日本代購",
+    "action": "japan",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 60,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 20,
+    "label": "限時特價",
+    "action": "sale",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 70,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 21,
+    "label": "商品類別",
+    "action": "category",
+    "action_value": "",
+    "parent_id": null,
+    "placement": "both",
+    "sort_order": 1,
+    "is_active": 1,
+    "created_at": "2026-10-25 00:13:58"
+  },
+  {
+    "id": 1001,
+    "label": "上衣",
+    "action": "custom",
+    "action_value": "上衣",
+    "parent_id": 21,
+    "placement": "header",
+    "sort_order": 1,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1002,
+    "label": "下身",
+    "action": "category",
+    "action_value": "下身",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 2,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1003,
+    "label": "配件",
+    "action": "category",
+    "action_value": "配件",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 3,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1004,
+    "label": "鞋子",
+    "action": "category",
+    "action_value": "鞋子",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 4,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1005,
+    "label": "香氛、彩妝、保養品、清潔",
+    "action": "category",
+    "action_value": "香氛",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 5,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1009,
+    "label": "公仔、周邊、娃娃",
+    "action": "category",
+    "action_value": "公仔",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 9,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1012,
+    "label": "品牌周邊",
+    "action": "category",
+    "action_value": "品牌周邊",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 12,
+    "is_active": 1,
+    "created_at": "2026-10-24 23:31:49"
+  },
+  {
+    "id": 1016,
+    "label": "外套",
+    "action": "category",
+    "action_value": "",
+    "parent_id": 21,
+    "placement": "both",
+    "sort_order": 3,
+    "is_active": 1,
+    "created_at": "2026-10-26 16:07:53"
+  }
+]

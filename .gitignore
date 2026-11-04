@@ -1,0 +1,19 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+**/.secrets/
+
+# Local dependencies, runtime data, and caches
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/uploads/
+**/backups/
+**/.tools/
+*.dump
+*.log
+
+# Keep the original site's existing dist/ files; new-site has its own rule.
