@@ -9,7 +9,7 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 - 將商品加入購物車，確認品項與金額後建立訂單。
 - 登入會員後查看訂單內容與目前狀態。
 
-## 店主管理功能
+## 管理功能
 
 - 新增、編輯商品，管理商品照片、規格、售價和庫存。
 - 維護首頁、導覽選單與商店內容。
@@ -19,8 +19,8 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 - **前端**：React、TypeScript、Vite
 - **後端**：Python、FastAPI、SQLAlchemy
-- **資料庫**：PostgreSQL、Alembic
-- **執行環境**：Docker Compose、Caddy
+- **資料庫**：PostgreSQL
+- **執行環境**：Docker
 
 ## 畫面預覽
 
@@ -38,7 +38,7 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 ![手機版購物車](new-site/test-results/acceptance-cart-mobile.png)
 
-### 店主管理｜電腦版
+### 店主管理｜
 
 ![管理後台導覽選單](new-site/test-results/navigation-save-fixed.png)
 
@@ -48,8 +48,8 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 以下是商店主要資料表的關係圖。購物車目前由網站處理，不是資料庫資料表；登入、操作紀錄和網站設定等輔助資料未列入。
 
-![WK.SLELCT 商店資料關係圖](docs/images/store-erd.svg)
+![WK.SLELCT 商店資料關係圖]<img width="1194" height="919" alt="image" src="https://github.com/user-attachments/assets/8239f0f9-f9b1-4cb9-a911-596b67b65d0d" />
 
 ## 專案狀態
 
-新版目前仍在開發與測試，尚未取代原站。正式金流、物流及上線環境仍需完成設定與驗收。
+目前已完成開發測試。但正式金流、物流及上線環境仍需完成設定與驗收。
