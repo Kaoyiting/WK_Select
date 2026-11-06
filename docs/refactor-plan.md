@@ -1,0 +1,99 @@
+# WK.SLELCT Refactor Plan
+
+## Scope and safeguards
+
+- Refactor the current new-store project from GitHub `origin/main` at `2e875ac` on branch `codex/refactor-full-project`.
+- Place the application and runtime files under `site/`. Keep the user-facing `README.md` and portfolio images at the repository root.
+- The existing local workspace, original site files, `.env`/`.secrets`, backups, and untracked `new-site.zip` are outside this worktree and must remain untouched.
+- Preserve the rendered UI, responsive behavior, routes, API paths and payloads, PostgreSQL schema and data, payment/order/inventory rules, environment behavior, and Docker service behavior.
+- Do not push to `main` during refactoring. Do not run migrations against existing databases or remove Docker volumes.
+
+## Repository baseline
+
+- React 19, TypeScript, and Vite. `frontend/src/main.tsx` selects the storefront or `/admin`; storefront navigation uses hash routes. Existing CSS is loaded through the current `?inline` mechanism.
+- TypeScript `strict` is already enabled. `npm run build` runs `tsc --noEmit` followed by `vite build`.
+- No frontend test command, Playwright dependency, or existing E2E suite is present. Do not add a test framework as part of the first refactor phase.
+- FastAPI routes are registered under `/api/v1`. Backend modules already group routers, schemas, services, and SQLAlchemy models by business area.
+- PostgreSQL schema changes are out of scope. Alembic history is immutable during this work.
+- The backend seed directory is `/app/data`; Compose mounts `./data:/app/data:ro`. Keep this relationship when moving Compose and data under `site/`.
+- Local recorded acceptance on 2026-10-29 reported 62 pytest cases passed with one deprecation warning. This is historical evidence, not a fresh baseline for commit `2e875ac`.
+- Current source sizes on this branch: `Storefront.tsx` 1,373 lines; `Admin.tsx` 1,238; `store.css` 2,396; `admin.css` 979; `new.css` 181.
+- Eight screenshots were tracked in `test-results/` at the base revision. The current README references seven screenshots plus the ERD; keep those seven under `docs/images/screenshots/` and exclude the unreferenced ATM checkout image. Keep generated visual-test artifacts ignored under `site/test-results/`.
+
+## Target repository layout
+
+```text
+README.md
+.gitignore
+docs/
+  refactor-plan.md
+  images/
+    store-erd.svg
+    screenshots/       # eight README screenshots, relative links
+site/
+  .dockerignore
+  .env.example
+  compose.yaml
+  frontend/
+  backend/
+  data/
+  infra/
+  scripts/
+```
+
+Keep the existing domain-oriented backend layout. Organize frontend pages and feature components around the current storefront and admin responsibilities, without adding routing or state-management libraries. Do not create empty folders.
+
+## Execution phases
+
+### Phase 0: establish safe baseline
+
+- Record source revision, clean worktree state, routes, API contracts, model/migration inventory, Compose services, and current screenshot references.
+- Confirm the test database is isolated before running backend tests. Never use production or personal data for automated tests.
+- Capture available baseline UI states using fixed test data and viewport sizes. Report any state that cannot be reproduced.
+
+### Phase 1: repository organization — complete
+
+- Move application/runtime files into `site/`, preserving relative paths expected by Docker Compose, Dockerfiles, scripts, and `/app/data`. (Complete.)
+- Keep `README.md` and `docs/` at root. Replace the README's external ERD attachment URL with `docs/images/store-erd.svg`; use relative paths for all eight screenshots.
+- Update `.gitignore` so `.env`, secrets, backups, dependencies, build output, generated screenshots, and local-only legacy iteration files remain excluded.
+- Verify paths and Compose context resolution before code extraction.
+
+Phase 1 checks on 2026-11-07:
+
+- `docker compose -p wk-select-refactor -f site/compose.yaml --env-file site/.env.example config --quiet`: passed.
+- All 8 README image links (7 screenshots and the ERD) resolve to files in the repository: passed.
+- `npm run build` from `site/frontend`: passed; TypeScript check and Vite production build completed.
+- No backend tests were run in Phase 1. The recorded 62-pass result remains historical until rerun in an isolated test database.
+
+### Phase 2: React extraction
+
+- Split the large storefront and admin components by existing responsibilities. Preserve DOM structure, class names, event timing, state ownership, effects, hash routes, and storage behavior.
+- Keep `main.tsx`'s path selection and CSS injection order. Do not modify CSS in this phase.
+- Check whether moving the locally declared `ProductTable` changes mount behavior or state retention.
+- Use the current `components/`, `lib/`, and existing admin editors where they are already suitable.
+
+### Phase 3: backend review
+
+- Audit existing modules and change only concrete readability or duplication issues. Keep `/api/v1`, response/error contracts, authentication, CSRF, session behavior, transaction boundaries, and third-party integration behavior.
+- Preserve the current modular-monolith structure; do not add layers solely for architectural symmetry.
+
+### Phase 4: data, scripts, and infrastructure review
+
+- Keep PostgreSQL models and Alembic revisions unchanged. Review query changes against existing transaction and concurrency behavior.
+- Keep the Compose services, volumes, health checks, environment variables, seed mount, and deployment behavior equivalent.
+- Remove no script or data file until code, Docker, documentation, and workflow references are checked.
+
+### Phase 5: verification and documentation
+
+- Run `npm run build` from `site/frontend`.
+- Run existing backend pytest only with the confirmed isolated `_test` database; do not assume a frontend test suite exists.
+- Compare available storefront/admin screenshots at fixed viewport sizes. Mark unavailable states and dynamic differences as unverified.
+- Update documentation to reflect actual functionality. Describe payment as manual/sandbox where applicable and shipping as manually recorded; do not claim live payment settlement or carrier tracking.
+- Preserve the user-facing README tone and relative image links.
+
+## Change checkpoints
+
+- Keep each phase in a focused commit and inspect its diff before proceeding.
+- Do not combine broad formatting changes with behavior-preserving extraction.
+- If an issue requires changing business rules, the database schema, public API behavior, production credentials, or deployment semantics, record it separately and stop that change for review.
+- Before handoff, report completed, failed, and unverified checks. Do not claim pixel-perfect equivalence unless the corresponding states were compared.

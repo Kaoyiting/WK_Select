@@ -26,30 +26,30 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 ### 顧客購物｜電腦版
 
-![電腦版首頁](test-results/home-no-duplicate.png)
+![電腦版首頁](docs/images/screenshots/home-no-duplicate.png)
 
-![電腦版商品詳情](test-results/product-carousel.png)
+![電腦版商品詳情](docs/images/screenshots/product-carousel.png)
 
 
 ### 顧客購物｜手機版
 
-![手機版商品瀏覽](test-results/store-mobile.png)
+![手機版商品瀏覽](docs/images/screenshots/store-mobile.png)
 
-![手機版商品詳情](test-results/acceptance-product-mobile.png)
+![手機版商品詳情](docs/images/screenshots/acceptance-product-mobile.png)
 
-![手機版購物車](test-results/acceptance-cart-mobile.png)
+![手機版購物車](docs/images/screenshots/acceptance-cart-mobile.png)
 
 ### 店主管理｜電腦版
 
-![管理後台導覽選單](test-results/navigation-save-fixed.png)
+![管理後台導覽選單](docs/images/screenshots/navigation-save-fixed.png)
 
-![管理後台網站內容](test-results/slide-controls-admin.png)
+![管理後台網站內容](docs/images/screenshots/slide-controls-admin.png)
 
 ## 資料關係圖（ER Diagram）
 
 以下是商店主要資料表的關係圖。購物車目前由網站處理，不是資料庫資料表；登入、操作紀錄和網站設定等輔助資料未列入。
 
-<img width="1200" height="928" alt="image" src="https://github.com/user-attachments/assets/7bf67a4d-1943-4e38-9fa0-89fc7b73446e" />
+![WK.SLELCT 商店資料關係圖](docs/images/store-erd.svg)
 
 
 ## 專案狀態
