@@ -30,7 +30,6 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 ![電腦版商品詳情](test-results/product-carousel.png)
 
-![電腦版結帳畫面](test-results/atm-checkout-desktop.png)
 
 ### 顧客購物｜手機版
 
