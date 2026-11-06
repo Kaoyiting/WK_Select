@@ -105,6 +105,14 @@ Phase 1 checks on 2026-11-07:
 - Update documentation to reflect actual functionality. Describe payment as manual/sandbox where applicable and shipping as manually recorded; do not claim live payment settlement or carrier tracking.
 - Preserve the user-facing README tone and relative image links.
 
+Verification status for this worktree:
+
+- `npm run build`: passed after the final frontend extraction.
+- `python -m compileall -q app`: passed. This checks Python syntax, not API behavior.
+- Compose configuration validation: passed using `site/.env.example`.
+- README preview assets: all 8 references resolve to repository-relative files; none use an absolute local path.
+- Backend pytest and fresh browser screenshots were not run. This worktree has no `.env`, disposable `*_test` database, or running app with fixed test data; the test fixture is destructive to its configured database. Existing README screenshots remain the documented preview set and were not regenerated.
+
 ## Change checkpoints
 
 - Keep each phase in a focused commit and inspect its diff before proceeding.
