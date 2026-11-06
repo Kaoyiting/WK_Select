@@ -49,7 +49,8 @@ WK.SELECT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 以下是商店主要資料表的關係圖。購物車目前由網站處理，不是資料庫資料表；登入、操作紀錄和網站設定等輔助資料未列入。
 
-![WK.SELECT 商店資料關係圖](docs/images/store-erd.svg)
+<img width="1191" height="924" alt="image" src="https://github.com/user-attachments/assets/7d5b741d-3fc6-4144-b785-216ba04e2808" />
+
 
 
 ## 專案狀態
