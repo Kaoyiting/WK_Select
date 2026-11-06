@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1090" viewBox="0 0 1280 1090" role="img" aria-labelledby="title desc">
-  <title id="title">E-R Model WK.SLELCT Store</title>
-  <desc id="desc">Database tables, fields, data types, and crow's foot relationships for the WK.SLELCT shopping website.</desc>
+  <title id="title">E-R Model WK.SELECT Store</title>
+  <desc id="desc">Database tables, fields, data types, and crow's foot relationships for the WK.SELECT shopping website.</desc>
   <style>
     text { font-family: Arial, 'Noto Sans', sans-serif; fill: #222; }
     .title { font-size: 22px; font-weight: 700; }
@@ -28,7 +28,7 @@
     </marker>
   </defs>
   <rect width="1280" height="1090" fill="#fff"/>
-  <text x="28" y="42" class="title">E-R Model WK.SLELCT Store</text>
+  <text x="28" y="42" class="title">E-R Model WK.SELECT Store</text>
 
   <!-- Relationships: drawn behind the table boxes -->
   <g class="relation">

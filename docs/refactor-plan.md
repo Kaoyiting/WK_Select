@@ -1,10 +1,10 @@
-# WK.SLELCT Refactor Plan
+# WK.SELECT Refactor Plan
 
 ## Scope and safeguards
 
 - Refactor the current new-store project from GitHub `origin/main` at `2e875ac` on branch `codex/refactor-full-project`.
-- Place the application and runtime files under `site/`. Keep the user-facing `README.md` and portfolio images at the repository root.
-- The existing local workspace, original site files, `.env`/`.secrets`, backups, and untracked `new-site.zip` are outside this worktree and must remain untouched.
+- The application and runtime files now live at the repository root alongside the user-facing `README.md` and `docs/`.
+- The user moved application files from `site/` into the repository root. Preserve that move and all local `.env`/`.secrets` and generated files.
 - Preserve the rendered UI, responsive behavior, routes, API paths and payloads, PostgreSQL schema and data, payment/order/inventory rules, environment behavior, and Docker service behavior.
 - Do not push to `main` during refactoring. Do not run migrations against existing databases or remove Docker volumes.
 
@@ -12,13 +12,13 @@
 
 - React 19, TypeScript, and Vite. `frontend/src/main.tsx` selects the storefront or `/admin`; storefront navigation uses hash routes. Existing CSS is loaded through the current `?inline` mechanism.
 - TypeScript `strict` is already enabled. `npm run build` runs `tsc --noEmit` followed by `vite build`.
-- No frontend test command, Playwright dependency, or existing E2E suite is present. Do not add a test framework as part of the first refactor phase.
+- Playwright E2E coverage is now available under `frontend/e2e/` and can be run with `npm run test:e2e` from `frontend/`.
 - FastAPI routes are registered under `/api/v1`. Backend modules already group routers, schemas, services, and SQLAlchemy models by business area.
 - PostgreSQL schema changes are out of scope. Alembic history is immutable during this work.
-- The backend seed directory is `/app/data`; Compose mounts `./data:/app/data:ro`. Keep this relationship when moving Compose and data under `site/`.
+- The backend seed directory is `/app/data`; Compose mounts `./data:/app/data:ro` from the repository root.
 - Local recorded acceptance on 2026-10-29 reported 62 pytest cases passed with one deprecation warning. This is historical evidence, not a fresh baseline for commit `2e875ac`.
-- Current source sizes on this branch: `Storefront.tsx` 1,373 lines; `Admin.tsx` 1,238; `store.css` 2,396; `admin.css` 979; `new.css` 181.
-- Eight screenshots were tracked in `test-results/` at the base revision. The current README references seven screenshots plus the ERD; keep those seven under `docs/images/screenshots/` and exclude the unreferenced ATM checkout image. Keep generated visual-test artifacts ignored under `site/test-results/`.
+- Pre-refactor source sizes: `Storefront.tsx` 1,373 lines and `Admin.tsx` 1,238. After extraction, they are 593 and 531 lines. CSS is unchanged (`store.css` 2,396; `admin.css` 979; `new.css` 181).
+- The README references seven screenshots and the ERD using repository-relative paths. Generated visual-test artifacts under `test-results/` are ignored.
 
 ## Target repository layout
 
@@ -30,15 +30,14 @@ docs/
   images/
     store-erd.svg
     screenshots/       # seven README screenshots, relative links
-site/
-  .dockerignore
-  .env.example
-  compose.yaml
-  frontend/
-  backend/
-  data/
-  infra/
-  scripts/
+.dockerignore
+.env.example
+compose.yaml
+frontend/
+backend/
+data/
+infra/
+scripts/
 ```
 
 Keep the existing domain-oriented backend layout. Organize frontend pages and feature components around the current storefront and admin responsibilities, without adding routing or state-management libraries. Do not create empty folders.
@@ -59,12 +58,14 @@ Keep the existing domain-oriented backend layout. Organize frontend pages and fe
 - Confirm the test database is isolated before running backend tests. Never use production or personal data for automated tests.
 - Capture available baseline UI states using fixed test data and viewport sizes. Report any state that cannot be reproduced.
 
-### Phase 1: repository organization — complete
+### Phase 1: repository organization — complete; files later moved to root
 
-- Move application/runtime files into `site/`, preserving relative paths expected by Docker Compose, Dockerfiles, scripts, and `/app/data`. (Complete.)
+- The first organization pass placed application/runtime files under `site/`. The user later moved those files into the repository root; relative paths for Docker Compose, Dockerfiles, scripts, and `/app/data` now resolve from root.
 - Keep `README.md` and `docs/` at root. Replace the README's external ERD attachment URL with `docs/images/store-erd.svg`; use relative paths for all eight screenshots.
 - Update `.gitignore` so `.env`, secrets, backups, dependencies, build output, generated screenshots, and local-only legacy iteration files remain excluded.
 - Verify paths and Compose context resolution before code extraction.
+
+The checks below document the first `site/` layout pass. They are retained as history; current commands run from the repository root.
 
 Phase 1 checks on 2026-11-07:
 
@@ -85,21 +86,24 @@ Phase 1 checks on 2026-11-07:
 
 - Audit existing modules and change only concrete readability or duplication issues. Keep `/api/v1`, response/error contracts, authentication, CSRF, session behavior, transaction boundaries, and third-party integration behavior.
 - Preserve the current modular-monolith structure; do not add layers solely for architectural symmetry.
-- Review found that business modules already own their routers, schemas, services, and models. Moved the existing audit-log endpoint from `main.py` into `modules/audit/router.py`; it remains under `/api/v1/admin/audit-logs` with the same response. No other backend extraction was justified.
-- No backend tests were run: no `.env` or isolated `*_test` database is configured in this worktree. The test fixture drops and recreates its configured database, so testing is deferred until a disposable test database is explicitly available.
-- `python -m compileall -q app` passed after moving the audit route.
+- Kept the existing domain modules and extracted product-view deduplication from the Catalog HTTP router into `modules/catalog/service.py`.
+- Split Payments HTTP routes into the general payment router, sandbox callbacks, and order-linked ATM test endpoints. Public paths and transaction rules remain unchanged.
+- Orders stock locking, idempotency, transitions, and payment coordination remain in the existing service because they enforce cross-record transaction behavior.
+- No database schema or migration changes were made.
+- The backend test fixture now requires `TESTING=true` and a separate `TEST_DATABASE_URL` ending in `_test`; it overrides `DATABASE_URL` before engine creation. See `backend/tests/README.md`.
+- Current backend HTTP route files: Catalog router 222 lines; Payments general, sandbox, and ATM-test routers are 57, 116, and 64 lines. Orders service is 253 lines and remains responsible for stock locks, idempotency, and order state transitions.
+- `python -m compileall -q app tests` passed. Full backend pytest passed against the isolated `wk_select_new_test` database: 63 passed, one Starlette/httpx deprecation warning.
 
 ### Phase 4: data, scripts, and infrastructure review — complete
 
 - Keep PostgreSQL models and Alembic revisions unchanged. Review query changes against existing transaction and concurrency behavior.
 - Keep the Compose services, volumes, health checks, environment variables, seed mount, and deployment behavior equivalent.
 - Remove no script or data file until code, Docker, documentation, and workflow references are checked.
-- Checked Compose service/build contexts, Dockerfiles, the PostgreSQL init script, seed-data mount, and script working-directory resolution after moving files to `site/`; all remain relative to the new project root.
-- `docker compose -p wk-select-refactor -f site/compose.yaml --env-file site/.env.example config --quiet` passed. The five tracked seed JSON files remain in `site/data/`; the local-only content file and generated test artifacts are excluded by `.gitignore`.
+- The Compose project, data, scripts, and infrastructure now resolve from the repository root. The local-only content file and generated test artifacts are excluded by `.gitignore`.
 
 ### Phase 5: verification and documentation
 
-- Run `npm run build` from `site/frontend`.
+- Run `npm run build` from `frontend/`.
 - Run existing backend pytest only with the confirmed isolated `_test` database; do not assume a frontend test suite exists.
 - Compare available storefront/admin screenshots at fixed viewport sizes. Mark unavailable states and dynamic differences as unverified.
 - Update documentation to reflect actual functionality. Describe payment as manual/sandbox where applicable and shipping as manually recorded; do not claim live payment settlement or carrier tracking.
@@ -107,11 +111,14 @@ Phase 1 checks on 2026-11-07:
 
 Verification status for this worktree:
 
-- `npm run build`: passed after the final frontend extraction.
-- `python -m compileall -q app`: passed. This checks Python syntax, not API behavior.
-- Compose configuration validation: passed using `site/.env.example`.
-- README preview assets: all 8 references resolve to repository-relative files; none use an absolute local path.
-- Backend pytest and fresh browser screenshots were not run. This worktree has no `.env`, disposable `*_test` database, or running app with fixed test data; the test fixture is destructive to its configured database. Existing README screenshots remain the documented preview set and were not regenerated.
+- `npm run build` from `frontend/`: passed.
+- `npm run test:e2e` from `frontend/`: 3 passed (store/cart/checkout path, mobile overflow, admin login and operations).
+- `python -m compileall -q app tests` from `backend/`: passed.
+- Backend pytest with `TESTING=true` and `TEST_DATABASE_URL` against the isolated `wk_select_new_test` database: 63 passed, one Starlette/httpx deprecation warning.
+- Docker Compose verification ran in an isolated project on ports 18089/18449; the existing app on port 8089 was left untouched.
+- README screenshots and ERD use repository-relative paths. Reference images were not regenerated during this pass.
+- No CSS or database schema changes were made. Desktop/mobile flow checks passed; visual comparison found dynamic product/image differences, so pixel-perfect equivalence is not claimed. Playwright currently checks behavior and viewport overflow, but has no fixed screenshot snapshot assertions; pre-refactor visual equivalence remains unverified.
+- Corrected the FastAPI title and npm package name to `WK.SELECT`/`wk-select`. Kept the Compose project name `wk-select-new` because changing it would rename running containers and volumes.
 
 ## Change checkpoints
 

@@ -19,5 +19,5 @@
 *.log
 
 # Local-only legacy iteration files retained by the user
-/site/frontend/src/features/admin/RichEditor.tsx
-/site/data/store_site_content.json
+/frontend/src/features/admin/RichEditor.tsx
+/data/store_site_content.json
