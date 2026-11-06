@@ -29,7 +29,7 @@ docs/
   refactor-plan.md
   images/
     store-erd.svg
-    screenshots/       # eight README screenshots, relative links
+    screenshots/       # seven README screenshots, relative links
 site/
   .dockerignore
   .env.example
@@ -42,6 +42,14 @@ site/
 ```
 
 Keep the existing domain-oriented backend layout. Organize frontend pages and feature components around the current storefront and admin responsibilities, without adding routing or state-management libraries. Do not create empty folders.
+
+### Frontend extraction progress — underway
+
+- Reduced `Storefront.tsx` from 1,373 to 594 lines by extracting the product page, member page, checkout, order summary, product card, navigation, store picker, recommendations, and product rules under `frontend/src/features/storefront/`.
+- Reduced `Admin.tsx` from 1,238 to 531 lines by extracting the product table/payload helper, navigation editing, customer/request records, and account settings under `frontend/src/features/admin/`.
+- Preserved the existing component markup and CSS class names; no styles or route selection were changed.
+- `npm run build` passed after each extraction group (TypeScript and Vite production build). The most recent build transformed 57 modules and completed successfully.
+- The Admin shell and catalog, order, and content sections remain under review for further extraction.
 
 ## Execution phases
 
@@ -71,6 +79,7 @@ Phase 1 checks on 2026-11-07:
 - Keep `main.tsx`'s path selection and CSS injection order. Do not modify CSS in this phase.
 - Check whether moving the locally declared `ProductTable` changes mount behavior or state retention.
 - Use the current `components/`, `lib/`, and existing admin editors where they are already suitable.
+- Progress: underway. See the extraction note above. Do not mark complete until the remaining Admin page sections have been reviewed.
 
 ### Phase 3: backend review
 

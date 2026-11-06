@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "../../components/Shared";
 import type { Product, Metadata } from "../../lib/types";
 import { api } from "../../lib/api";
-import { productPayload } from "../Admin";
+import { productPayload } from "./productPayload";
 import { ImageUpload } from "./ImageUpload";
 import { TextImageEditor } from "./TextImageEditor";
 export function ProductEditor({
