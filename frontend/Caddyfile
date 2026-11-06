@@ -1,4 +1,12 @@
 {$SITE_HOST:localhost} {
+    log {
+        format filter {
+            request>remote_ip delete
+            request>client_ip delete
+            request>headers delete
+            request>uri regexp "\\?.*" ""
+        }
+    }
     handle /api/* {
         reverse_proxy api:8000
     }

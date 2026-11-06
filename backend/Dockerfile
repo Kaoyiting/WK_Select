@@ -8,4 +8,4 @@ COPY . .
 RUN useradd -m app && mkdir -p /app/uploads && chown app:app /app/uploads
 USER app
 ENV PATH="/app/.venv/bin:$PATH"
-CMD ["uvicorn","app.main:app","--host","0.0.0.0","--port","8000"]
+CMD ["uvicorn","app.main:app","--host","0.0.0.0","--port","8000","--no-access-log"]
