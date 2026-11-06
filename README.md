@@ -50,7 +50,8 @@ WK.SLELCT 為喜愛韓系服飾與生活選品的顧客，提供從挑選商品�
 
 以下是商店主要資料表的關係圖。購物車目前由網站處理，不是資料庫資料表；登入、操作紀錄和網站設定等輔助資料未列入。
 
-![WK.SLELCT 商店資料關係圖](docs/images/store-erd.svg)
+<img width="1200" height="928" alt="image" src="https://github.com/user-attachments/assets/7bf67a4d-1943-4e38-9fa0-89fc7b73446e" />
+
 
 ## 專案狀態
 
