@@ -3,11 +3,10 @@ from fastapi import FastAPI, Request, Depends
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.middleware.sessions import SessionMiddleware
-from sqlalchemy import text, select
+from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 from app.core.config import settings
 from app.core.database import get_db
-from app.core.dependencies import admin
 from app.modules.auth.router import router as auth
 from app.modules.catalog.router import router as catalog
 from app.modules.content.router import router as content
@@ -16,7 +15,7 @@ from app.modules.customers.router import router as customers
 from app.modules.requests.router import router as requests
 from app.modules.orders.router import router as orders
 from app.modules.payments.router import router as payments
-from app.modules.audit.models import Audit
+from app.modules.audit.router import router as audit
 
 app = FastAPI(
     title="WK.SLELCT API",
@@ -32,7 +31,17 @@ app.add_middleware(
     same_site="lax",
     max_age=600,
 )
-for router in [auth, catalog, content, assets, customers, requests, orders, payments]:
+for router in [
+    auth,
+    catalog,
+    content,
+    assets,
+    customers,
+    requests,
+    orders,
+    payments,
+    audit,
+]:
     app.include_router(router, prefix="/api/v1")
 app.include_router(media_router)
 
@@ -112,21 +121,3 @@ def live():
 def ready(db=Depends(get_db)):
     db.execute(text("SELECT 1"))
     return {"status": "ok"}
-
-
-@app.get("/api/v1/admin/audit-logs")
-def audit(a=Depends(admin), db=Depends(get_db)):
-    return {
-        "data": [
-            {
-                "id": x.id,
-                "admin_id": x.admin_id,
-                "action": x.action,
-                "target_id": x.target_id,
-                "created_at": x.created_at.isoformat(),
-            }
-            for x in db.scalars(
-                select(Audit).order_by(Audit.created_at.desc()).limit(200)
-            )
-        ]
-    }

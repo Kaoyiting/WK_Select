@@ -43,13 +43,13 @@ site/
 
 Keep the existing domain-oriented backend layout. Organize frontend pages and feature components around the current storefront and admin responsibilities, without adding routing or state-management libraries. Do not create empty folders.
 
-### Frontend extraction progress — underway
+### Frontend extraction progress — complete
 
 - Reduced `Storefront.tsx` from 1,373 to 594 lines by extracting the product page, member page, checkout, order summary, product card, navigation, store picker, recommendations, and product rules under `frontend/src/features/storefront/`.
 - Reduced `Admin.tsx` from 1,238 to 531 lines by extracting the product table/payload helper, navigation editing, customer/request records, and account settings under `frontend/src/features/admin/`.
 - Preserved the existing component markup and CSS class names; no styles or route selection were changed.
 - `npm run build` passed after each extraction group (TypeScript and Vite production build). The most recent build transformed 57 modules and completed successfully.
-- The Admin shell and catalog, order, and content sections remain under review for further extraction.
+- The Admin shell retains the dashboard and catalog, order, and content views that share its loaded data and refresh flow; standalone page components now live in `features/admin/`.
 
 ## Execution phases
 
@@ -73,24 +73,29 @@ Phase 1 checks on 2026-11-07:
 - `npm run build` from `site/frontend`: passed; TypeScript check and Vite production build completed.
 - No backend tests were run in Phase 1. The recorded 62-pass result remains historical until rerun in an isolated test database.
 
-### Phase 2: React extraction
+### Phase 2: React extraction — complete
 
 - Split the large storefront and admin components by existing responsibilities. Preserve DOM structure, class names, event timing, state ownership, effects, hash routes, and storage behavior.
 - Keep `main.tsx`'s path selection and CSS injection order. Do not modify CSS in this phase.
 - Check whether moving the locally declared `ProductTable` changes mount behavior or state retention.
 - Use the current `components/`, `lib/`, and existing admin editors where they are already suitable.
-- Progress: underway. See the extraction note above. Do not mark complete until the remaining Admin page sections have been reviewed.
+- Complete. Keep the current shared Admin shell and refresh flow intact; separate the independently owned page components as listed above.
 
-### Phase 3: backend review
+### Phase 3: backend review — complete
 
 - Audit existing modules and change only concrete readability or duplication issues. Keep `/api/v1`, response/error contracts, authentication, CSRF, session behavior, transaction boundaries, and third-party integration behavior.
 - Preserve the current modular-monolith structure; do not add layers solely for architectural symmetry.
+- Review found that business modules already own their routers, schemas, services, and models. Moved the existing audit-log endpoint from `main.py` into `modules/audit/router.py`; it remains under `/api/v1/admin/audit-logs` with the same response. No other backend extraction was justified.
+- No backend tests were run: no `.env` or isolated `*_test` database is configured in this worktree. The test fixture drops and recreates its configured database, so testing is deferred until a disposable test database is explicitly available.
+- `python -m compileall -q app` passed after moving the audit route.
 
-### Phase 4: data, scripts, and infrastructure review
+### Phase 4: data, scripts, and infrastructure review — complete
 
 - Keep PostgreSQL models and Alembic revisions unchanged. Review query changes against existing transaction and concurrency behavior.
 - Keep the Compose services, volumes, health checks, environment variables, seed mount, and deployment behavior equivalent.
 - Remove no script or data file until code, Docker, documentation, and workflow references are checked.
+- Checked Compose service/build contexts, Dockerfiles, the PostgreSQL init script, seed-data mount, and script working-directory resolution after moving files to `site/`; all remain relative to the new project root.
+- `docker compose -p wk-select-refactor -f site/compose.yaml --env-file site/.env.example config --quiet` passed. The five tracked seed JSON files remain in `site/data/`; the local-only content file and generated test artifacts are excluded by `.gitignore`.
 
 ### Phase 5: verification and documentation
 
