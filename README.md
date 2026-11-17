@@ -53,11 +53,7 @@ WK.SELECT 是面向韓系服飾與生活選品的電商網站，涵蓋顧客瀏�
 
 ![管理後台網站內容](docs/images/screenshots/slide-controls-admin.png)
 
-## 資料關係圖（ER Diagram）
 
-以下是商店主要資料表的關係圖。購物車目前由網站處理，不是資料庫資料表；登入、操作紀錄和網站設定等輔助資料未列入。
-
-![WK.SELECT 商店資料關係圖](docs/images/store-erd.svg)
 
 
 ## 專案狀態
